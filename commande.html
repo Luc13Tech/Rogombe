@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commande & Livraison – Rogombe</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body { background:#f4f7f5; }
+    .page-nav {
+      background:#fff; border-bottom:1px solid var(--gray-2);
+      padding:0 24px; position:sticky; top:0; z-index:100;
+      box-shadow:0 2px 12px rgba(0,0,0,.06);
+    }
+    .page-nav-inner {
+      max-width:900px; margin:0 auto; height:64px;
+      display:flex; align-items:center; gap:20px;
+    }
+    .back-link { display:flex; align-items:center; gap:8px; font-weight:600; font-size:.9rem; color:var(--text-lt); }
+    .back-link:hover { color:var(--green); }
+    .back-link span { width:32px; height:32px; background:var(--gray-1); border-radius:50%; display:flex; align-items:center; justify-content:center; }
+    .page-nav-logo { font-family:var(--font-display); font-size:1.5rem; font-weight:900; color:var(--dark); margin-left:auto; }
+    .page-nav-logo .logo-r { color:var(--gold); }
+
+    /* STEPS */
+    .order-steps {
+      max-width:900px; margin:32px auto 0; padding:0 24px;
+      display:flex; align-items:center; gap:0;
+    }
+    .ostep {
+      display:flex; flex-direction:column; align-items:center; gap:6px; flex:1;
+    }
+    .ostep-dot {
+      width:36px; height:36px; border-radius:50%;
+      border:2px solid var(--gray-2); background:#fff;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.9rem; font-weight:700; color:var(--text-lt);
+      transition:all .3s;
+    }
+    .ostep.done .ostep-dot { background:var(--green); border-color:var(--green); color:#fff; }
+    .ostep.active .ostep-dot { background:var(--gold); border-color:var(--gold); color:var(--dark); font-weight:900; }
+    .ostep-label { font-size:.75rem; font-weight:600; color:var(--text-lt); text-align:center; }
+    .ostep.active .ostep-label { color:var(--dark); }
+    .ostep.done .ostep-label { color:var(--green); }
+    .ostep-line { flex:1; height:2px; background:var(--gray-2); margin-bottom:20px; transition:background .3s; }
+    .ostep-line.done { background:var(--green); }
+
+    /* MAIN LAYOUT */
+    .order-layout {
+      max-width:900px; margin:28px auto 60px; padding:0 24px;
+      display:grid; grid-template-columns:1fr 340px; gap:24px; align-items:start;
+    }
+
+    /* CARDS */
+    .order-card {
+      background:#fff; border-radius:var(--radius-lg);
+      box-shadow:var(--shadow); margin-bottom:20px; overflow:hidden;
+    }
+    .oc-header {
+      padding:20px 24px; border-bottom:1px solid var(--gray-2);
+      display:flex; align-items:center; gap:12px;
+    }
+    .oc-header-icon {
+      width:40px; height:40px; border-radius:12px;
+      background:var(--green-lt); color:var(--green);
+      display:flex; align-items:center; justify-content:center; font-size:1.2rem;
+    }
+    .oc-header h2 { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:var(--dark); }
+    .oc-header p { font-size:.82rem; color:var(--text-lt); margin-top:2px; }
+    .oc-body { padding:24px; }
+
+    /* FORM FIELDS */
+    .field-group { margin-bottom:18px; }
+    .field-group label { display:block; font-size:.85rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .field-group input, .field-group select, .field-group textarea {
+      width:100%; padding:13px 16px;
+      border:1.5px solid var(--gray-2); border-radius:var(--radius);
+      font-family:var(--font-body); font-size:.9rem; color:var(--text);
+      background:var(--gray-1); outline:none; transition:border-color .2s, background .2s;
+    }
+    .field-group input:focus, .field-group select:focus, .field-group textarea:focus {
+      border-color:var(--green); background:#fff;
+    }
+    .field-group input::placeholder, .field-group textarea::placeholder { color:var(--gray-3); }
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .field-group textarea { resize:vertical; min-height:80px; }
+
+    /* DELIVERY OPTIONS */
+    .delivery-options { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+    .delivery-opt {
+      border:2px solid var(--gray-2); border-radius:var(--radius);
+      padding:16px; cursor:pointer; text-align:center;
+      transition:border-color .25s, background .25s;
+    }
+    .delivery-opt input { display:none; }
+    .delivery-opt.selected { border-color:var(--green); background:var(--green-lt); }
+    .delivery-opt .do-icon { font-size:1.8rem; margin-bottom:8px; display:block; }
+    .delivery-opt h4 { font-size:.9rem; font-weight:700; color:var(--dark); margin-bottom:4px; }
+    .delivery-opt p { font-size:.78rem; color:var(--text-lt); }
+
+    /* LOCATION BOX */
+    .location-box {
+      background:var(--gray-1); border-radius:var(--radius);
+      padding:20px; margin-bottom:16px; display:none;
+    }
+    .location-box.visible { display:block; }
+    .loc-actions { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+    .loc-btn {
+      display:flex; align-items:center; gap:8px;
+      padding:10px 16px; border-radius:50px; border:1.5px solid var(--gray-2);
+      background:#fff; font-family:var(--font-body); font-size:.85rem; font-weight:600;
+      color:var(--text); cursor:pointer; transition:all .25s;
+    }
+    .loc-btn:hover, .loc-btn.active { background:var(--green); border-color:var(--green); color:#fff; }
+    .loc-result {
+      background:#fff; border-radius:var(--radius); padding:14px 16px;
+      border:1.5px solid var(--green-lt); display:none;
+    }
+    .loc-result.visible { display:block; }
+    .loc-result-inner { display:flex; align-items:center; gap:10px; }
+    .loc-pin { font-size:1.4rem; }
+    .loc-txt strong { display:block; font-size:.9rem; color:var(--dark); }
+    .loc-txt span { font-size:.78rem; color:var(--text-lt); }
+    .delivery-fee-box {
+      background:linear-gradient(135deg,var(--green-lt),#d1fae5);
+      border:1.5px solid #6ee7b7; border-radius:var(--radius);
+      padding:16px 20px; margin-top:14px;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .df-label { font-size:.88rem; color:var(--dark); font-weight:600; }
+    .df-amount { font-size:1.2rem; font-weight:900; color:var(--green); }
+
+    /* PAYMENT OPTIONS */
+    .payment-options { display:flex; flex-direction:column; gap:12px; }
+    .pay-opt {
+      border:2px solid var(--gray-2); border-radius:var(--radius);
+      padding:16px 20px; cursor:pointer;
+      display:flex; align-items:center; gap:16px;
+      transition:border-color .25s, background .25s;
+    }
+    .pay-opt input { display:none; }
+    .pay-opt.selected { border-color:var(--green); background:var(--green-lt); }
+    .pay-opt-logo { font-size:1.8rem; flex-shrink:0; }
+    .pay-opt-info h4 { font-size:.95rem; font-weight:700; color:var(--dark); margin-bottom:2px; }
+    .pay-opt-info p { font-size:.8rem; color:var(--text-lt); }
+    .pay-opt-badge {
+      margin-left:auto; background:var(--green); color:#fff;
+      font-size:.72rem; font-weight:700; padding:4px 10px;
+      border-radius:50px; flex-shrink:0;
+    }
+
+    /* PHONE INPUT for payment */
+    .phone-confirm-box {
+      background:var(--gray-1); border-radius:var(--radius); padding:16px; margin-top:12px; display:none;
+    }
+    .phone-confirm-box.visible { display:block; }
+
+    /* ORDER SUMMARY SIDEBAR */
+    .summary-card {
+      background:#fff; border-radius:var(--radius-lg);
+      box-shadow:var(--shadow); position:sticky; top:80px;
+    }
+    .sc-head { padding:20px 24px; border-bottom:1px solid var(--gray-2); }
+    .sc-head h3 { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:var(--dark); }
+    .sc-items { padding:16px 24px; max-height:280px; overflow-y:auto; }
+    .sc-item {
+      display:flex; align-items:center; gap:12px;
+      padding:10px 0; border-bottom:1px solid var(--gray-2);
+    }
+    .sc-item:last-child { border-bottom:none; }
+    .sc-item img { width:48px; height:48px; border-radius:10px; object-fit:cover; flex-shrink:0; }
+    .sc-item-info { flex:1; }
+    .sc-item-name { font-size:.85rem; font-weight:600; color:var(--dark); }
+    .sc-item-qty { font-size:.78rem; color:var(--text-lt); }
+    .sc-item-price { font-size:.9rem; font-weight:700; color:var(--green); flex-shrink:0; }
+    .sc-totals { padding:16px 24px; border-top:1px solid var(--gray-2); }
+    .sc-total-row {
+      display:flex; justify-content:space-between;
+      font-size:.88rem; color:var(--text-lt); margin-bottom:8px;
+    }
+    .sc-total-row.main {
+      font-size:1.05rem; font-weight:900; color:var(--dark);
+      padding-top:12px; border-top:1.5px solid var(--gray-2); margin-top:8px;
+    }
+    .sc-promo { padding:0 24px 16px; }
+    .promo-input-wrap { display:flex; gap:8px; }
+    .promo-input-wrap input {
+      flex:1; padding:10px 14px; border:1.5px solid var(--gray-2);
+      border-radius:var(--radius); font-family:var(--font-body); font-size:.88rem;
+      outline:none; background:var(--gray-1);
+    }
+    .promo-input-wrap input:focus { border-color:var(--green); }
+    .promo-apply-btn {
+      padding:10px 16px; background:var(--green); color:#fff;
+      border:none; border-radius:var(--radius); font-family:var(--font-body);
+      font-size:.85rem; font-weight:700; cursor:pointer;
+    }
+    .confirm-order-btn {
+      display:block; width:calc(100% - 48px); margin:0 24px 24px;
+      padding:16px; background:var(--green); color:#fff;
+      border:none; border-radius:50px; font-family:var(--font-body);
+      font-size:1rem; font-weight:700; cursor:pointer;
+      transition:background .25s, transform .2s; text-align:center;
+    }
+    .confirm-order-btn:hover { background:var(--dark); transform:translateY(-2px); }
+    .confirm-order-btn:disabled { background:var(--gray-2); color:var(--gray-3); cursor:not-allowed; transform:none; }
+
+    /* SUCCESS MODAL */
+    .success-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,.5);
+      z-index:999; display:none; align-items:center; justify-content:center; padding:24px;
+    }
+    .success-overlay.open { display:flex; }
+    .success-modal {
+      background:#fff; border-radius:var(--radius-lg); padding:48px 40px;
+      text-align:center; max-width:480px; width:100%;
+      animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn { from{opacity:0;transform:scale(.8)} to{opacity:1;transform:scale(1)} }
+    .success-icon { font-size:4rem; margin-bottom:16px; display:block; }
+    .success-modal h2 { font-family:var(--font-display); font-size:1.8rem; font-weight:900; color:var(--dark); margin-bottom:12px; }
+    .success-modal p { color:var(--text-lt); font-size:.95rem; line-height:1.7; margin-bottom:24px; }
+    .success-steps { text-align:left; background:var(--gray-1); border-radius:var(--radius); padding:16px 20px; margin-bottom:28px; }
+    .success-step { display:flex; align-items:flex-start; gap:12px; margin-bottom:12px; font-size:.88rem; color:var(--text); }
+    .success-step:last-child { margin-bottom:0; }
+    .ss-dot { width:22px; height:22px; background:var(--green); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.7rem; font-weight:700; flex-shrink:0; margin-top:1px; }
+    .success-order-id { font-size:1.1rem; font-weight:900; color:var(--green); margin-bottom:8px; }
+    .success-btn { display:block; padding:14px 32px; background:var(--green); color:#fff; border:none; border-radius:50px; font-family:var(--font-body); font-size:.95rem; font-weight:700; cursor:pointer; margin:0 auto; }
+
+    @media(max-width:768px) {
+      .order-layout { grid-template-columns:1fr; }
+      .summary-card { position:static; }
+      .delivery-options { grid-template-columns:1fr; }
+      .field-row { grid-template-columns:1fr; }
+    }
+    @media(max-width:480px) {
+      .order-steps { gap:0; }
+      .ostep-label { font-size:.65rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="page-nav">
+  <div class="page-nav-inner">
+    <a href="categorie.html?cat=medicaments" class="back-link">
+      <span>←</span> Retour
+    </a>
+    <a href="index.html" class="page-nav-logo"><span class="logo-r">R</span>ogombe</a>
+  </div>
+</nav>
+
+<!-- STEPS -->
+<div class="order-steps">
+  <div class="ostep done" id="step1">
+    <div class="ostep-dot">✓</div>
+    <div class="ostep-label">Panier</div>
+  </div>
+  <div class="ostep-line done"></div>
+  <div class="ostep active" id="step2">
+    <div class="ostep-dot">2</div>
+    <div class="ostep-label">Infos & Livraison</div>
+  </div>
+  <div class="ostep-line" id="line23"></div>
+  <div class="ostep" id="step3">
+    <div class="ostep-dot">3</div>
+    <div class="ostep-label">Paiement</div>
+  </div>
+  <div class="ostep-line" id="line34"></div>
+  <div class="ostep" id="step4">
+    <div class="ostep-dot">4</div>
+    <div class="ostep-label">Confirmation</div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="order-layout">
+  <div class="order-main">
+
+    <!-- 1. INFOS CLIENT -->
+    <div class="order-card" id="cardInfos">
+      <div class="oc-header">
+        <div class="oc-header-icon">👤</div>
+        <div>
+          <h2>Vos informations</h2>
+          <p>Requis pour la livraison et la confirmation</p>
+        </div>
+      </div>
+      <div class="oc-body">
+        <div class="field-row">
+          <div class="field-group">
+            <label>Prénom *</label>
+            <input type="text" id="clientPrenom" placeholder="Jean" />
+          </div>
+          <div class="field-group">
+            <label>Nom *</label>
+            <input type="text" id="clientNom" placeholder="Obame" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Numéro de téléphone *</label>
+          <input type="tel" id="clientTel" placeholder="+241 07 12 34 56" />
+        </div>
+        <p style="font-size:.8rem;color:var(--text-lt);margin-top:-8px;">⚠️ Ce numéro sera communiqué au livreur pour la coordination de votre livraison.</p>
+      </div>
+    </div>
+
+    <!-- 2. MODE DE LIVRAISON -->
+    <div class="order-card" id="cardLivraison">
+      <div class="oc-header">
+        <div class="oc-header-icon">🚚</div>
+        <div>
+          <h2>Mode de livraison</h2>
+          <p>Choisissez comment recevoir votre commande</p>
+        </div>
+      </div>
+      <div class="oc-body">
+        <div class="delivery-options">
+          <label class="delivery-opt selected" onclick="selectDelivery('domicile', this)">
+            <input type="radio" name="delivery" value="domicile" checked />
+            <span class="do-icon">🏠</span>
+            <h4>Se faire livrer</h4>
+            <p>Livraison à domicile par un livreur Rogombe</p>
+          </label>
+          <label class="delivery-opt" onclick="selectDelivery('retrait', this)">
+            <input type="radio" name="delivery" value="retrait" />
+            <span class="do-icon">🏪</span>
+            <h4>Retrait magasin</h4>
+            <p>Récupérez vous-même en magasin, gratuit</p>
+          </label>
+        </div>
+
+        <!-- LOCALISATION (livraison domicile) -->
+        <div class="location-box visible" id="locationBox">
+          <p style="font-size:.85rem;font-weight:700;color:var(--dark);margin-bottom:12px;">📍 Indiquez votre position</p>
+          <div class="loc-actions">
+            <button class="loc-btn" onclick="locateMe()">📡 Localiser ma position</button>
+            <button class="loc-btn" onclick="openMapSearch()">🗺️ Identifier un lieu proche</button>
+          </div>
+          <div class="field-group" style="margin-bottom:12px;">
+            <label>Ou indiquez votre quartier manuellement</label>
+            <input type="text" id="quartierInput" placeholder="Ex: Akanda, Libreville Nord, Owendo…" oninput="manualLocation()" />
+          </div>
+          <div class="loc-result" id="locResult">
+            <div class="loc-result-inner">
+              <span class="loc-pin">📍</span>
+              <div class="loc-txt">
+                <strong id="locName">—</strong>
+                <span id="locDetail">Localisation détectée</span>
+              </div>
+            </div>
+          </div>
+          <div class="delivery-fee-box" id="deliveryFeeBox" style="display:none;">
+            <div>
+              <div class="df-label">💰 Frais de livraison estimés</div>
+              <div style="font-size:.78rem;color:var(--text-lt);margin-top:2px;">Basé sur votre distance au magasin</div>
+            </div>
+            <div class="df-amount" id="deliveryFeeAmount">— FCFA</div>
+          </div>
+          <button class="btn-primary" style="margin-top:14px;width:100%;justify-content:center;" onclick="confirmLocation()" id="confirmLocBtn" disabled>
+            ✓ Confirmer la livraison
+          </button>
+        </div>
+
+        <!-- RETRAIT MAGASIN -->
+        <div class="location-box" id="retraitBox">
+          <p style="font-size:.85rem;font-weight:700;color:var(--dark);margin-bottom:12px;">🏪 Choisissez votre magasin de retrait</p>
+          <div class="field-group">
+            <select id="retraitStore">
+              <option value="">Sélectionnez un magasin</option>
+              <option>Pharmacie Centrale – Libreville Centre</option>
+              <option>Pharmacie Sainte-Marie – Akanda</option>
+              <option>Hyper Casino – Libreville</option>
+              <option>SuperMarché Score – Owendo</option>
+              <option>Pharmacie du Peuple – Port-Gentil</option>
+            </select>
+          </div>
+          <div style="background:var(--gold-lt);border-radius:var(--radius);padding:14px 16px;border:1px solid #fcd34d;font-size:.85rem;color:var(--dark);">
+            🕐 Votre commande sera prête dans <strong>15 à 20 minutes</strong> après confirmation.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. PAIEMENT -->
+    <div class="order-card" id="cardPaiement">
+      <div class="oc-header">
+        <div class="oc-header-icon">💳</div>
+        <div>
+          <h2>Mode de paiement</h2>
+          <p>Choisissez votre méthode de paiement sécurisé</p>
+        </div>
+      </div>
+      <div class="oc-body">
+        <div class="payment-options">
+          <label class="pay-opt selected" onclick="selectPayment('airtel', this)">
+            <input type="radio" name="payment" value="airtel" checked />
+            <span class="pay-opt-logo">📱</span>
+            <div class="pay-opt-info">
+              <h4>Airtel Money</h4>
+              <p>Paiement instantané via votre compte Airtel</p>
+            </div>
+            <span class="pay-opt-badge">Populaire</span>
+          </label>
+
+          <label class="pay-opt" onclick="selectPayment('mobi', this)">
+            <input type="radio" name="payment" value="mobi" />
+            <span class="pay-opt-logo">📲</span>
+            <div class="pay-opt-info">
+              <h4>Mobi Cash</h4>
+              <p>Paiement via votre compte Mobi Cash</p>
+            </div>
+          </label>
+
+          <label class="pay-opt" onclick="selectPayment('card', this)">
+            <input type="radio" name="payment" value="card" />
+            <span class="pay-opt-logo">💳</span>
+            <div class="pay-opt-info">
+              <h4>MasterCard / Visa</h4>
+              <p>Carte bancaire internationale sécurisée</p>
+            </div>
+          </label>
+        </div>
+
+        <!-- Mobile Money phone -->
+        <div class="phone-confirm-box visible" id="mobileMoneyBox">
+          <div class="field-group" style="margin-bottom:0;">
+            <label>Numéro Mobile Money *</label>
+            <input type="tel" id="mmPhone" placeholder="+241 07 12 34 56" />
+          </div>
+          <p style="font-size:.78rem;color:var(--text-lt);margin-top:8px;">Vous recevrez une demande de paiement sur ce numéro.</p>
+        </div>
+
+        <!-- Card -->
+        <div class="phone-confirm-box" id="cardBox">
+          <div class="field-group">
+            <label>Numéro de carte</label>
+            <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)" />
+          </div>
+          <div class="field-row">
+            <div class="field-group" style="margin-bottom:0;">
+              <label>Date d'expiration</label>
+              <input type="text" placeholder="MM/AA" maxlength="5" />
+            </div>
+            <div class="field-group" style="margin-bottom:0;">
+              <label>CVV</label>
+              <input type="text" placeholder="123" maxlength="3" />
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--green-lt);border-radius:var(--radius);padding:12px 16px;margin-top:16px;display:flex;align-items:center;gap:10px;">
+          <span>🔒</span>
+          <span style="font-size:.82rem;color:var(--dark);">Paiement 100% sécurisé. Vos données bancaires ne sont jamais stockées.</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /order-main -->
+
+  <!-- SIDEBAR RÉCAPITULATIF -->
+  <div class="summary-card">
+    <div class="sc-head">
+      <h3>🛒 Récapitulatif</h3>
+    </div>
+    <div class="sc-items" id="summaryItems">
+      <!-- filled by JS -->
+    </div>
+    <div class="sc-promo">
+      <p style="font-size:.8rem;font-weight:700;color:var(--text);margin-bottom:8px;">Code promo</p>
+      <div class="promo-input-wrap">
+        <input type="text" id="promoCode" placeholder="ROGOMBE10" />
+        <button class="promo-apply-btn" onclick="applyPromo()">Appliquer</button>
+      </div>
+      <p id="promoMsg" style="font-size:.78rem;margin-top:6px;display:none;"></p>
+    </div>
+    <div class="sc-totals">
+      <div class="sc-total-row"><span>Sous-total</span><span id="summSubtotal">—</span></div>
+      <div class="sc-total-row"><span>Livraison</span><span id="summDelivery">—</span></div>
+      <div class="sc-total-row" id="summPromoRow" style="display:none;color:var(--green)"><span>Réduction</span><span id="summPromoAmt">—</span></div>
+      <div class="sc-total-row main"><span>Total</span><span id="summTotal">—</span></div>
+    </div>
+    <button class="confirm-order-btn" id="confirmOrderBtn" onclick="confirmOrder()">
+      🔒 Confirmer et payer
+    </button>
+    <p style="text-align:center;font-size:.75rem;color:var(--text-lt);padding:0 24px 16px;">En confirmant, vous acceptez nos <a href="conditions.html" style="color:var(--green)">CGU</a> et notre <a href="confidentialite.html" style="color:var(--green)">Politique de confidentialité</a>.</p>
+  </div>
+</div><!-- /order-layout -->
+
+<!-- SUCCESS MODAL -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-modal">
+    <span class="success-icon">🎉</span>
+    <div class="success-order-id" id="successOrderId">#RG-000000</div>
+    <h2>Commande confirmée !</h2>
+    <p>Votre paiement a été reçu. Voici ce qui se passe maintenant :</p>
+    <div class="success-steps">
+      <div class="success-step">
+        <div class="ss-dot">1</div>
+        <span>Le <strong>service de gestion Rogombe</strong> a reçu votre commande et notifie l'agent du magasin.</span>
+      </div>
+      <div class="success-step">
+        <div class="ss-dot">2</div>
+        <span>L'<strong>agent magasin</strong> rassemble vos articles et les passe en caisse.</span>
+      </div>
+      <div class="success-step">
+        <div class="ss-dot">3</div>
+        <span>Un <strong>livreur proche de vous</strong> est contacté avec votre position GPS et votre numéro.</span>
+      </div>
+      <div class="success-step">
+        <div class="ss-dot">4</div>
+        <span>Vous recevrez un <strong>SMS de confirmation</strong> avec le détail de votre commande et le contact du livreur.</span>
+      </div>
+    </div>
+    <p style="margin-bottom:16px;">📞 Contact service client : <strong>+241 01 23 45 67</strong></p>
+    <button class="success-btn" onclick="window.location.href='index.html'">Retour à l'accueil</button>
+  </div>
+</div>
+
+<script>
+  /* ---- CART FROM STORAGE ---- */
+  const cart = JSON.parse(localStorage.getItem('rogombeCart') || '[]');
+  let deliveryFee = 1500;
+  let promoDiscount = 0;
+  let currentPayment = 'airtel';
+  let locationConfirmed = false;
+  let deliveryMode = 'domicile';
+
+  /* ---- RENDER SUMMARY ---- */
+  function renderSummary() {
+    const items = document.getElementById('summaryItems');
+    if (cart.length === 0) {
+      items.innerHTML = '<p style="text-align:center;color:var(--text-lt);font-size:.88rem;padding:20px 0;">Panier vide</p>';
+    } else {
+      items.innerHTML = cart.map(i => `
+        <div class="sc-item">
+          <img src="${i.img}" alt="${i.name}" />
+          <div class="sc-item-info">
+            <div class="sc-item-name">${i.name}</div>
+            <div class="sc-item-qty">x${i.qty}</div>
+          </div>
+          <div class="sc-item-price">${(i.price * i.qty).toLocaleString('fr')} F</div>
+        </div>`).join('');
+    }
+    updateTotals();
+  }
+
+  function updateTotals() {
+    const sub = cart.reduce((s,c) => s+c.price*c.qty, 0);
+    const deliv = deliveryMode === 'retrait' ? 0 : deliveryFee;
+    const total = sub + deliv - promoDiscount;
+    document.getElementById('summSubtotal').textContent = sub.toLocaleString('fr') + ' FCFA';
+    document.getElementById('summDelivery').textContent = deliveryMode === 'retrait' ? 'Gratuit' : deliveryFee.toLocaleString('fr') + ' FCFA';
+    document.getElementById('summTotal').textContent = total.toLocaleString('fr') + ' FCFA';
+    document.getElementById('deliveryFeeAmount').textContent = deliveryFee.toLocaleString('fr') + ' FCFA';
+  }
+
+  /* ---- DELIVERY ---- */
+  function selectDelivery(mode, el) {
+    deliveryMode = mode;
+    document.querySelectorAll('.delivery-opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('locationBox').classList.toggle('visible', mode === 'domicile');
+    document.getElementById('retraitBox').classList.toggle('visible', mode === 'retrait');
+    if (mode === 'retrait') { locationConfirmed = true; deliveryFee = 0; }
+    else { locationConfirmed = false; }
+    updateTotals();
+  }
+
+  /* ---- LOCATION ---- */
+  function locateMe() {
+    document.querySelectorAll('.loc-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    event.target.textContent = '⏳ Localisation…';
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        const { latitude, longitude } = pos.coords;
+        const fee = calcFee(latitude, longitude);
+        showLocation(`Lat ${latitude.toFixed(4)}, Lng ${longitude.toFixed(4)}`, 'Position GPS détectée', fee);
+        event.target.textContent = '✅ Position détectée';
+      }, () => {
+        showLocation('Libreville Centre', 'Position par défaut', 1500);
+        event.target.textContent = '📡 Localiser ma position';
+      });
+    } else {
+      showLocation('Libreville Centre', 'Position par défaut', 1500);
+    }
+  }
+
+  function openMapSearch() {
+    document.querySelectorAll('.loc-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('quartierInput').focus();
+    document.getElementById('quartierInput').placeholder = 'Tapez votre quartier ou adresse…';
+  }
+
+  const QUARTIERS = [
+    {name:'Akanda', fee:2500}, {name:'Owendo', fee:2000}, {name:'Libreville Centre', fee:1000},
+    {name:'Libreville Nord', fee:1500}, {name:'Libreville Sud', fee:1800}, {name:'Ntoum', fee:3500},
+    {name:'Bikélé', fee:3000}, {name:'PK5', fee:1200}, {name:'PK8', fee:1500},
+    {name:'PK12', fee:2000}, {name:'Alibandeng', fee:2200}, {name:'Angondjé', fee:1800},
+    {name:'Mont-Bouët', fee:1000}, {name:'Glass', fee:900}, {name:'Louis', fee:1000},
+    {name:'Batterie 4', fee:1300}, {name:'Charbonnages', fee:1500}, {name:'IAI', fee:1800},
+  ];
+
+  function manualLocation() {
+    const val = document.getElementById('quartierInput').value.trim();
+    if (val.length < 2) return;
+    const match = QUARTIERS.find(q => q.name.toLowerCase().includes(val.toLowerCase()));
+    if (match) {
+      showLocation(match.name, 'Quartier reconnu', match.fee);
+    } else if (val.length > 3) {
+      showLocation(val, 'Quartier saisi manuellement', 2000);
+    }
+  }
+
+  function calcFee(lat, lng) {
+    // Centre LBV approx
+    const d = Math.sqrt(Math.pow(lat - 0.3924, 2) + Math.pow(lng - 9.4536, 2)) * 111;
+    return Math.max(900, Math.min(4000, Math.round(d * 300)));
+  }
+
+  function showLocation(name, detail, fee) {
+    deliveryFee = fee;
+    document.getElementById('locName').textContent = name;
+    document.getElementById('locDetail').textContent = detail;
+    document.getElementById('locResult').classList.add('visible');
+    document.getElementById('deliveryFeeBox').style.display = 'flex';
+    document.getElementById('confirmLocBtn').disabled = false;
+    updateTotals();
+  }
+
+  function confirmLocation() {
+    locationConfirmed = true;
+    document.getElementById('confirmLocBtn').textContent = '✅ Livraison confirmée';
+    document.getElementById('confirmLocBtn').style.background = '#16a34a';
+    // Advance visual step
+    document.getElementById('step2').classList.remove('active');
+    document.getElementById('step2').classList.add('done');
+    document.getElementById('step2').querySelector('.ostep-dot').textContent = '✓';
+    document.getElementById('line23').classList.add('done');
+    document.getElementById('step3').classList.add('active');
+  }
+
+  /* ---- PAYMENT ---- */
+  function selectPayment(type, el) {
+    currentPayment = type;
+    document.querySelectorAll('.pay-opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('mobileMoneyBox').classList.toggle('visible', type !== 'card');
+    document.getElementById('cardBox').classList.toggle('visible', type === 'card');
+    // Label
+    if (type === 'airtel') document.querySelector('#mobileMoneyBox label').textContent = 'Numéro Airtel Money *';
+    if (type === 'mobi')   document.querySelector('#mobileMoneyBox label').textContent = 'Numéro Mobi Cash *';
+  }
+
+  /* ---- PROMO CODE ---- */
+  function applyPromo() {
+    const code = document.getElementById('promoCode').value.trim().toUpperCase();
+    const msg  = document.getElementById('promoMsg');
+    if (code === 'ROGOMBE10') {
+      const sub = cart.reduce((s,c) => s+c.price*c.qty, 0);
+      promoDiscount = Math.round(sub * 0.10);
+      document.getElementById('summPromoRow').style.display = 'flex';
+      document.getElementById('summPromoAmt').textContent = '-' + promoDiscount.toLocaleString('fr') + ' FCFA';
+      msg.textContent = '✅ Code appliqué : -10% !';
+      msg.style.color = 'var(--green)';
+    } else {
+      promoDiscount = 0;
+      document.getElementById('summPromoRow').style.display = 'none';
+      msg.textContent = '❌ Code invalide';
+      msg.style.color = '#ef4444';
+    }
+    msg.style.display = 'block';
+    updateTotals();
+  }
+
+  /* ---- FORMAT CARD ---- */
+  function formatCard(input) {
+    let v = input.value.replace(/\D/g,'').substring(0,16);
+    input.value = v.replace(/(.{4})/g,'$1 ').trim();
+  }
+
+  /* ---- CONFIRM ORDER ---- */
+  function confirmOrder() {
+    const prenom = document.getElementById('clientPrenom').value.trim();
+    const nom    = document.getElementById('clientNom').value.trim();
+    const tel    = document.getElementById('clientTel').value.trim();
+
+    if (!prenom || !nom || !tel) {
+      alert('⚠️ Veuillez renseigner votre nom, prénom et numéro de téléphone.'); return;
+    }
+    if (deliveryMode === 'domicile' && !locationConfirmed) {
+      alert('⚠️ Veuillez confirmer votre adresse de livraison.'); return;
+    }
+    if (cart.length === 0) {
+      alert('⚠️ Votre panier est vide.'); return;
+    }
+
+    // Simulate payment
+    const btn = document.getElementById('confirmOrderBtn');
+    btn.textContent = '⏳ Traitement en cours…';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      // Clear cart
+      localStorage.removeItem('rogombeCart');
+      // Show success
+      const orderId = '#RG-' + Date.now().toString().slice(-6);
+      document.getElementById('successOrderId').textContent = orderId;
+      document.getElementById('successOverlay').classList.add('open');
+      // Advance steps
+      document.getElementById('step3').classList.remove('active');
+      document.getElementById('step3').classList.add('done');
+      document.getElementById('step3').querySelector('.ostep-dot').textContent = '✓';
+      document.getElementById('line34').classList.add('done');
+      document.getElementById('step4').classList.add('done');
+      document.getElementById('step4').querySelector('.ostep-dot').textContent = '✓';
+    }, 2000);
+  }
+
+  renderSummary();
+</script>
+</body>
+</html>

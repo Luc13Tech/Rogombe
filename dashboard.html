@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tableau de bord – Rogombe</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body class="dashboard-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html"><span class="logo-r">R</span>ogombe</a>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="sidebar-link active">
+        <span class="s-icon">🏠</span> Accueil
+      </a>
+      <a href="#" class="sidebar-link">
+        <span class="s-icon">🛒</span> Commander
+      </a>
+      <a href="#" class="sidebar-link">
+        <span class="s-icon">📦</span> Mes commandes
+      </a>
+      <a href="#" class="sidebar-link">
+        <span class="s-icon">❤️</span> Favoris
+      </a>
+      <a href="#" class="sidebar-link">
+        <span class="s-icon">🎁</span> Fidélité
+      </a>
+      <a href="#" class="sidebar-link">
+        <span class="s-icon">⚙️</span> Paramètres
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="index.html" class="sidebar-link logout">
+        <span class="s-icon">←</span> Déconnexion
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="dash-main">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        <div class="topbar-search">
+          <span class="search-ico">🔍</span>
+          <input type="text" placeholder="Rechercher un produit, une pharmacie…" />
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="notif-btn">🔔 <span class="notif-badge">3</span></div>
+        <div class="user-chip">
+          <div class="user-av">MA</div>
+          <div class="user-info">
+            <strong>Marie-Ange</strong>
+            <span>Client</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD CONTENT -->
+    <div class="dash-content">
+
+      <div class="dash-hello">
+        <div>
+          <h1>Bonjour, Marie-Ange ! 👋</h1>
+          <p>Que souhaitez-vous commander aujourd'hui ?</p>
+        </div>
+        <div class="loyalty-chip">
+          <span class="loyalty-icon">⭐</span>
+          <div>
+            <strong>280 points</strong>
+            <span>Programme Fidélité</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK STATS -->
+      <div class="dash-stats">
+        <div class="dash-stat-card">
+          <div class="dsc-icon" style="background:#d1fae5;color:#059669">📦</div>
+          <div>
+            <strong>12</strong>
+            <span>Commandes total</span>
+          </div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dsc-icon" style="background:#fef3c7;color:#d97706">🚚</div>
+          <div>
+            <strong>1</strong>
+            <span>En cours</span>
+          </div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dsc-icon" style="background:#ede9fe;color:#7c3aed">❤️</div>
+          <div>
+            <strong>8</strong>
+            <span>Favoris</span>
+          </div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dsc-icon" style="background:#fee2e2;color:#dc2626">⭐</div>
+          <div>
+            <strong>280</strong>
+            <span>Points fidélité</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVE ORDER -->
+      <div class="section-card">
+        <div class="sc-header">
+          <h2>Commande en cours</h2>
+          <span class="badge-live">● Live</span>
+        </div>
+        <div class="order-track">
+          <div class="order-info">
+            <div class="order-store">
+              <div class="store-av">💊</div>
+              <div>
+                <strong>Pharmacie Centrale</strong>
+                <span>Commande #RG-20241201</span>
+              </div>
+            </div>
+            <div class="order-total">
+              <strong>4 500 FCFA</strong>
+              <span>3 articles</span>
+            </div>
+          </div>
+          <div class="track-steps">
+            <div class="track-step done">
+              <div class="ts-dot"></div>
+              <div class="ts-label">
+                <strong>Confirmée</strong>
+                <span>14:22</span>
+              </div>
+            </div>
+            <div class="track-line done"></div>
+            <div class="track-step done">
+              <div class="ts-dot"></div>
+              <div class="ts-label">
+                <strong>Préparée</strong>
+                <span>14:35</span>
+              </div>
+            </div>
+            <div class="track-line active"></div>
+            <div class="track-step active">
+              <div class="ts-dot pulse"></div>
+              <div class="ts-label">
+                <strong>En livraison</strong>
+                <span>~10 min</span>
+              </div>
+            </div>
+            <div class="track-line"></div>
+            <div class="track-step">
+              <div class="ts-dot"></div>
+              <div class="ts-label">
+                <strong>Livré</strong>
+                <span>—</span>
+              </div>
+            </div>
+          </div>
+          <div class="delivery-map-placeholder">
+            <div class="map-mock">
+              <div class="map-mock-inner">
+                <span class="map-pin">📍</span>
+                <p>Livreur en route — Arrivée estimée : <strong>15h05</strong></p>
+                <small>Wilson Ndong — 🛵 Moto</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHOP BY CATEGORY -->
+      <div class="section-card">
+        <div class="sc-header">
+          <h2>Parcourir les catégories</h2>
+          <a href="#" class="see-all">Tout voir →</a>
+        </div>
+        <div class="mini-cats">
+          <div class="mini-cat" style="--c:#16a34a">💊<span>Médicaments</span></div>
+          <div class="mini-cat" style="--c:#0ea5e9">🧴<span>Cosmétiques</span></div>
+          <div class="mini-cat" style="--c:#f59e0b">🥩<span>Boucherie</span></div>
+          <div class="mini-cat" style="--c:#ef4444">🥦<span>Légumes</span></div>
+          <div class="mini-cat" style="--c:#8b5cf6">🥛<span>Laitier</span></div>
+          <div class="mini-cat" style="--c:#ec4899">🧹<span>Ménager</span></div>
+        </div>
+      </div>
+
+      <!-- NEARBY STORES -->
+      <div class="section-card">
+        <div class="sc-header">
+          <h2>Commerces proches</h2>
+          <a href="#" class="see-all">Tout voir →</a>
+        </div>
+        <div class="stores-grid">
+          <div class="store-card">
+            <div class="store-img">
+              <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=300&q=80" alt="Pharmacie" />
+              <span class="store-type">Pharmacie</span>
+            </div>
+            <div class="store-info">
+              <h4>Pharmacie Centrale</h4>
+              <div class="store-meta">
+                <span>⭐ 4.8</span>
+                <span>📍 1.2 km</span>
+                <span>🕐 20 min</span>
+              </div>
+              <button class="store-btn-order">Commander</button>
+            </div>
+          </div>
+          <div class="store-card">
+            <div class="store-img">
+              <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=300&q=80" alt="Supermarché" />
+              <span class="store-type" style="background:#0ea5e9">Supermarché</span>
+            </div>
+            <div class="store-info">
+              <h4>Hyper Casino</h4>
+              <div class="store-meta">
+                <span>⭐ 4.6</span>
+                <span>📍 2.1 km</span>
+                <span>🕐 35 min</span>
+              </div>
+              <button class="store-btn-order">Commander</button>
+            </div>
+          </div>
+          <div class="store-card">
+            <div class="store-img">
+              <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&q=80" alt="Pharmacie" />
+              <span class="store-type">Pharmacie</span>
+            </div>
+            <div class="store-info">
+              <h4>Pharmacie du Peuple</h4>
+              <div class="store-meta">
+                <span>⭐ 4.5</span>
+                <span>📍 3.0 km</span>
+                <span>🕐 40 min</span>
+              </div>
+              <button class="store-btn-order">Commander</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECENT ORDERS -->
+      <div class="section-card">
+        <div class="sc-header">
+          <h2>Commandes récentes</h2>
+          <a href="#" class="see-all">Tout voir →</a>
+        </div>
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>Commande</th>
+              <th>Commerce</th>
+              <th>Date</th>
+              <th>Montant</th>
+              <th>Statut</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>#RG-20241201</strong></td>
+              <td>Pharmacie Centrale</td>
+              <td>01/12/2024</td>
+              <td>4 500 FCFA</td>
+              <td><span class="status-badge status-live">En livraison</span></td>
+              <td><button class="table-btn">Suivre</button></td>
+            </tr>
+            <tr>
+              <td><strong>#RG-20241128</strong></td>
+              <td>Hyper Casino</td>
+              <td>28/11/2024</td>
+              <td>12 300 FCFA</td>
+              <td><span class="status-badge status-done">Livré</span></td>
+              <td><button class="table-btn">Renouveler</button></td>
+            </tr>
+            <tr>
+              <td><strong>#RG-20241125</strong></td>
+              <td>Pharmacie du Peuple</td>
+              <td>25/11/2024</td>
+              <td>2 800 FCFA</td>
+              <td><span class="status-badge status-done">Livré</span></td>
+              <td><button class="table-btn">Renouveler</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+
+  <style>
+    body.dashboard-body { background: #f4f7f5; overflow-x: hidden; }
+
+    /* LAYOUT */
+    .sidebar {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: 240px;
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      padding: 28px 0;
+      z-index: 200;
+      transition: transform .3s;
+    }
+    .sidebar-logo {
+      padding: 0 24px 28px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      margin-bottom: 12px;
+    }
+    .sidebar-logo a {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--white);
+    }
+    .sidebar-nav { flex: 1; display: flex; flex-direction: column; gap: 4px; padding: 0 12px; }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      color: rgba(255,255,255,.6);
+      font-size: .9rem;
+      font-weight: 500;
+      transition: background .25s, color .25s;
+    }
+    .sidebar-link:hover, .sidebar-link.active {
+      background: rgba(10,124,78,.3);
+      color: var(--white);
+    }
+    .sidebar-link.active { background: var(--green); color: var(--white); }
+    .s-icon { font-size: 1.1rem; }
+    .sidebar-footer { padding: 12px; border-top: 1px solid rgba(255,255,255,.08); }
+    .logout:hover { background: rgba(239,68,68,.2) !important; color: #fca5a5 !important; }
+
+    .dash-main {
+      margin-left: 240px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      background: var(--white);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--gray-2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 16px; flex: 1; }
+    .topbar-right { display: flex; align-items: center; gap: 16px; }
+    .sidebar-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--text);
+    }
+    .topbar-search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gray-1);
+      border: 1px solid var(--gray-2);
+      border-radius: 50px;
+      padding: 10px 20px;
+      flex: 1;
+      max-width: 480px;
+    }
+    .topbar-search input {
+      background: none;
+      border: none;
+      outline: none;
+      font-family: var(--font-body);
+      font-size: .9rem;
+      color: var(--text);
+      flex: 1;
+    }
+    .topbar-search input::placeholder { color: var(--gray-3); }
+    .notif-btn {
+      position: relative;
+      font-size: 1.3rem;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .notif-badge {
+      position: absolute;
+      top: 4px; right: 4px;
+      background: #ef4444;
+      color: white;
+      font-size: .65rem;
+      font-weight: 700;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .user-chip { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .user-av {
+      width: 38px; height: 38px;
+      background: var(--green);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: .85rem;
+    }
+    .user-info strong { display: block; font-size: .9rem; color: var(--dark); }
+    .user-info span { font-size: .78rem; color: var(--text-lt); }
+
+    /* CONTENT */
+    .dash-content { padding: 32px; display: flex; flex-direction: column; gap: 24px; }
+
+    .dash-hello {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .dash-hello h1 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .dash-hello p { color: var(--text-lt); }
+
+    .loyalty-chip {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--dark);
+      padding: 14px 22px;
+      border-radius: 50px;
+      color: white;
+    }
+    .loyalty-icon { font-size: 1.4rem; }
+    .loyalty-chip strong { display: block; font-size: 1.1rem; color: var(--gold); }
+    .loyalty-chip span { font-size: .78rem; color: rgba(255,255,255,.6); }
+
+    /* STAT CARDS */
+    .dash-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .dash-stat-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: var(--shadow);
+    }
+    .dsc-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .dash-stat-card strong { display: block; font-size: 1.6rem; font-weight: 900; color: var(--dark); }
+    .dash-stat-card span { font-size: .82rem; color: var(--text-lt); }
+
+    /* SECTION CARDS */
+    .section-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+    .sc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .sc-header h2 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .badge-live {
+      background: #fef3c7;
+      color: #d97706;
+      font-size: .78rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 50px;
+      animation: pulse-text 1.5s infinite;
+    }
+    @keyframes pulse-text { 0%,100%{opacity:1} 50%{opacity:.6} }
+    .see-all { color: var(--green); font-size: .88rem; font-weight: 600; }
+
+    /* ORDER TRACK */
+    .order-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
+    .order-store { display: flex; align-items: center; gap: 14px; }
+    .store-av { font-size: 1.8rem; }
+    .order-store strong { display: block; font-size: 1rem; color: var(--dark); }
+    .order-store span { font-size: .82rem; color: var(--text-lt); }
+    .order-total strong { display: block; font-size: 1.2rem; color: var(--dark); font-weight: 700; }
+    .order-total span { font-size: .82rem; color: var(--text-lt); }
+
+    .track-steps { display: flex; align-items: center; margin-bottom: 24px; }
+    .track-step { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; }
+    .ts-dot {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-2);
+      background: var(--white);
+    }
+    .track-step.done .ts-dot { background: var(--green); border-color: var(--green); }
+    .track-step.active .ts-dot { background: var(--gold); border-color: var(--gold); }
+    .ts-dot.pulse { animation: pulseGold 1.5s infinite; }
+    @keyframes pulseGold {
+      0%,100%{ box-shadow: 0 0 0 0 rgba(212,160,23,.5); }
+      50%{ box-shadow: 0 0 0 8px rgba(212,160,23,0); }
+    }
+    .ts-label { text-align: center; }
+    .ts-label strong { display: block; font-size: .8rem; color: var(--dark); }
+    .ts-label span { font-size: .72rem; color: var(--text-lt); }
+    .track-line {
+      flex: 1;
+      height: 2px;
+      background: var(--gray-2);
+      margin: 0 8px;
+      margin-bottom: 24px;
+    }
+    .track-line.done { background: var(--green); }
+    .track-line.active { background: linear-gradient(to right, var(--green), var(--gold)); }
+
+    .map-mock {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-radius: var(--radius);
+      padding: 28px;
+      text-align: center;
+      border: 1px solid #6ee7b7;
+    }
+    .map-pin { font-size: 2rem; }
+    .map-mock p { color: var(--dark); margin: 8px 0 4px; }
+    .map-mock small { color: var(--text-lt); }
+
+    /* MINI CATS */
+    .mini-cats { display: flex; gap: 12px; flex-wrap: wrap; }
+    .mini-cat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 16px 20px;
+      background: var(--gray-1);
+      border-radius: var(--radius);
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color .25s, background .25s;
+      font-size: 1.6rem;
+    }
+    .mini-cat span { font-size: .8rem; font-weight: 600; color: var(--text); }
+    .mini-cat:hover { border-color: var(--c); background: color-mix(in srgb, var(--c) 8%, white); }
+
+    /* STORES GRID */
+    .stores-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .store-card { border: 1px solid var(--gray-2); border-radius: var(--radius); overflow: hidden; transition: box-shadow .3s, transform .3s; }
+    .store-card:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+    .store-img { position: relative; height: 130px; overflow: hidden; }
+    .store-img img { width: 100%; height: 100%; object-fit: cover; }
+    .store-type {
+      position: absolute; bottom: 10px; left: 10px;
+      background: var(--green);
+      color: white;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 50px;
+    }
+    .store-info { padding: 16px; }
+    .store-info h4 { font-size: .95rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+    .store-meta { display: flex; gap: 12px; font-size: .78rem; color: var(--text-lt); margin-bottom: 12px; }
+    .store-btn-order {
+      width: 100%;
+      padding: 10px;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: .85rem;
+      cursor: pointer;
+      transition: background .25s;
+    }
+    .store-btn-order:hover { background: var(--dark); }
+
+    /* ORDERS TABLE */
+    .orders-table { width: 100%; border-collapse: collapse; }
+    .orders-table th { text-align: left; font-size: .78rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--text-lt); padding: 0 16px 12px 0; border-bottom: 2px solid var(--gray-2); }
+    .orders-table td { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--gray-2); font-size: .9rem; color: var(--text); }
+    .orders-table tr:last-child td { border-bottom: none; }
+
+    .status-badge {
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+    .status-live { background: #fef3c7; color: #d97706; }
+    .status-done { background: var(--green-lt); color: var(--green); }
+
+    .table-btn {
+      padding: 7px 16px;
+      border: 2px solid var(--gray-2);
+      border-radius: 50px;
+      background: transparent;
+      font-family: var(--font-body);
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color .25s, color .25s;
+    }
+    .table-btn:hover { border-color: var(--green); color: var(--green); }
+
+    /* RESPONSIVE DASHBOARD */
+    @media (max-width: 1024px) {
+      .dash-stats { grid-template-columns: repeat(2, 1fr); }
+      .stores-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .dash-main { margin-left: 0; }
+      .sidebar-toggle { display: block; }
+      .dash-stats { grid-template-columns: repeat(2, 1fr); }
+      .stores-grid { grid-template-columns: 1fr; }
+      .orders-table { font-size: .82rem; }
+      .dash-content { padding: 20px; }
+      .topbar { padding: 12px 20px; }
+      .topbar-search { max-width: none; }
+      .user-info { display: none; }
+    }
+    @media (max-width: 480px) {
+      .dash-stats { grid-template-columns: 1fr 1fr; }
+      .track-steps { overflow-x: auto; padding-bottom: 8px; }
+    }
+  </style>
+
+  <script>
+    // Sidebar toggle on mobile
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+    if (sidebarToggle && sidebar) {
+      sidebarToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+      document.addEventListener('click', e => {
+        if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+          sidebar.classList.remove('open');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion – Rogombe</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="auth-page">
+
+    <!-- VISUAL SIDE -->
+    <div class="auth-visual">
+      <img src="https://images.unsplash.com/photo-1576671081837-49000212a370?w=800&q=80" alt="Pharmacie" />
+      <div class="auth-visual-overlay">
+        <a href="index.html" class="auth-visual-logo">
+          <span class="logo-r">R</span>ogombe
+        </a>
+        <h2>Bienvenue<br /><em>de retour !</em></h2>
+        <p>Commandez médicaments et courses depuis votre téléphone. Livraison rapide partout au Gabon.</p>
+        <div class="auth-stats">
+          <div class="auth-stat">
+            <strong>500+</strong>
+            <span>Produits disponibles</span>
+          </div>
+          <div class="auth-stat">
+            <strong>30 min</strong>
+            <span>Livraison express</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM SIDE -->
+    <div class="auth-form-side">
+      <div class="auth-form-wrap">
+        <h1>Se connecter</h1>
+        <p class="auth-sub">Pas encore de compte ? <a href="register.html">Créer un compte gratuit</a></p>
+
+        <div class="role-select" id="loginRoleSelect">
+          <label class="role-option selected">
+            <input type="radio" name="role" value="client" checked />
+            <span class="role-icon">👤</span>
+            <span>Client</span>
+          </label>
+          <label class="role-option">
+            <input type="radio" name="role" value="merchant" />
+            <span class="role-icon">🏪</span>
+            <span>Commerçant</span>
+          </label>
+          <label class="role-option">
+            <input type="radio" name="role" value="delivery" />
+            <span class="role-icon">🛵</span>
+            <span>Livreur</span>
+          </label>
+        </div>
+
+        <form class="auth-form" novalidate>
+          <div class="form-group">
+            <label for="email">Adresse e-mail</label>
+            <input type="email" id="email" name="email" placeholder="votre@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required />
+          </div>
+
+          <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox" /> Se souvenir de moi
+            </label>
+            <a href="#" class="forgot-link">Mot de passe oublié ?</a>
+          </div>
+
+          <button type="submit" class="auth-submit">Se connecter</button>
+        </form>
+
+        <div class="auth-divider">ou continuer avec</div>
+
+        <div class="social-auth">
+          <button class="social-auth-btn">
+            <img src="https://www.google.com/favicon.ico" alt="Google" width="18" />
+            Google
+          </button>
+          <button class="social-auth-btn">
+            <span>f</span> Facebook
+          </button>
+        </div>
+
+        <p class="auth-footer-note">
+          En vous connectant, vous acceptez nos
+          <a href="#">Conditions d'utilisation</a> et notre
+          <a href="#">Politique de confidentialité</a>.
+        </p>
+
+        <div class="back-home">
+          <a href="index.html">← Retour à l'accueil</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <style>
+    .auth-stats { display: flex; gap: 32px; margin-top: 20px; }
+    .auth-stat strong { display: block; font-size: 2rem; font-weight: 900; color: #fff; }
+    .auth-stat span { font-size: .82rem; color: rgba(255,255,255,.65); }
+
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: .87rem;
+    }
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-lt);
+      cursor: pointer;
+    }
+    .forgot-link { color: var(--green); font-weight: 600; }
+
+    .social-auth {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .social-auth-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px;
+      border: 2px solid var(--gray-2);
+      border-radius: var(--radius);
+      background: var(--gray-1);
+      font-family: var(--font-body);
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color .25s, background .25s;
+    }
+    .social-auth-btn:hover { border-color: var(--green); background: var(--white); }
+
+    .auth-footer-note {
+      font-size: .8rem;
+      color: var(--text-lt);
+      line-height: 1.6;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .auth-footer-note a { color: var(--green); }
+
+    .back-home { text-align: center; }
+    .back-home a { font-size: .88rem; color: var(--text-lt); font-weight: 500; }
+    .back-home a:hover { color: var(--green); }
+
+    @media (max-width: 900px) {
+      .auth-visual { display: none; }
+      .auth-page { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <script src="main.js"></script>
+</body>
+</html>

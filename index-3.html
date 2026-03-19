@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rogombe – Pharmacies & Supermarchés en ligne au Gabon</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-r">R</span>ogombe
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how">Comment ça marche</a></li>
+        <li><a href="#categories">Catalogue</a></li>
+        <li><a href="#partenaires">Partenaires</a></li>
+        <li><a href="#app">Application</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn-ghost">Se connecter</a>
+        <a href="register.html" class="btn-primary">Commencer</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#services">Services</a>
+      <a href="#how">Comment ça marche</a>
+      <a href="#categories">Catalogue</a>
+      <a href="#partenaires">Partenaires</a>
+      <a href="login.html">Se connecter</a>
+      <a href="register.html" class="mobile-cta">Commencer</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-overlay"></div>
+      <video class="hero-video" autoplay muted loop playsinline>
+        <source src="https://cdn.pixabay.com/video/2022/10/17/135339-762636309_large.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">🇬🇦 &nbsp;Disponible au Gabon</div>
+      <h1 class="hero-title">
+        Vos <em>pharmacies</em><br />& <em>supermarchés</em><br />livrés chez vous
+      </h1>
+      <p class="hero-sub">
+        Médicaments, courses, produits du quotidien — commandez en quelques clics et recevez à domicile ou retirez en magasin.
+      </p>
+      <div class="hero-btns">
+        <a href="register.html" class="btn-hero-primary">Commander maintenant</a>
+        <a href="#how" class="btn-hero-ghost">
+          <span class="play-icon">▶</span> Comment ça marche
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>500+</strong><span>Produits</span></div>
+        <div class="stat-sep"></div>
+        <div class="stat"><strong>30 min</strong><span>Livraison moy.</span></div>
+        <div class="stat-sep"></div>
+        <div class="stat"><strong>24/7</strong><span>Disponible</span></div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Défiler</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Airtel_logo_2010.svg/200px-Airtel_logo_2010.svg.png" alt="Airtel Money" />
+        <span>Airtel Money</span>
+      </div>
+      <div class="trust-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png" alt="MasterCard" />
+        <span>MasterCard</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">📱</span>
+        <span>Mobi Cash</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">🔒</span>
+        <span>Paiement sécurisé</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">📍</span>
+        <span>Suivi temps réel</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-label">Nos services</div>
+      <h2 class="section-title">Tout ce dont vous avez<br /><em>besoin, où vous êtes</em></h2>
+      <div class="services-grid">
+        <div class="service-card" data-delay="0">
+          <div class="service-img-wrap">
+            <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=600&q=80" alt="Pharmacie" />
+            <div class="service-badge">Pharmacie</div>
+          </div>
+          <div class="service-body">
+            <h3>Médicaments & Santé</h3>
+            <p>Accédez aux catalogues des pharmacies agréées. Ordonnances, vitamines, cosmétiques pharmaceutiques livrés en toute sécurité.</p>
+            <a href="register.html" class="service-link">Explorer →</a>
+          </div>
+        </div>
+        <div class="service-card featured" data-delay="150">
+          <div class="service-img-wrap">
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=80" alt="Supermarché" />
+            <div class="service-badge">Supermarché</div>
+          </div>
+          <div class="service-body">
+            <h3>Courses & Alimentation</h3>
+            <p>Fruits, légumes, épicerie, boissons, produits ménagers — faites vos courses depuis votre canapé et recevez-les rapidement.</p>
+            <a href="register.html" class="service-link">Explorer →</a>
+          </div>
+        </div>
+        <div class="service-card" data-delay="300">
+          <div class="service-img-wrap">
+            <img src="https://images.unsplash.com/photo-1619451334792-150fd785ee74?w=600&q=80" alt="Livraison" />
+            <div class="service-badge">Livraison</div>
+          </div>
+          <div class="service-body">
+            <h3>Livraison Express</h3>
+            <p>Nos livreurs partenaires assurent la collecte et la livraison rapide à votre domicile avec suivi GPS en temps réel.</p>
+            <a href="register.html" class="service-link">En savoir plus →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="how-bg-deco"></div>
+    <div class="container">
+      <div class="section-label light">Processus</div>
+      <h2 class="section-title light">Commander en<br /><em>4 étapes simples</em></h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-icon">🔍</div>
+          <h3>Cherchez</h3>
+          <p>Parcourez les catalogues des pharmacies et supermarchés proches de vous grâce à la géolocalisation.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-icon">🛒</div>
+          <h3>Sélectionnez</h3>
+          <p>Ajoutez vos produits au panier, choisissez vos quantités et votre mode de livraison.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-icon">💳</div>
+          <h3>Payez</h3>
+          <p>Réglez en toute sécurité via Airtel Money, Mobi Cash, MasterCard ou à la livraison.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-icon">🏠</div>
+          <h3>Recevez</h3>
+          <p>Suivez votre livreur en temps réel et recevez votre commande ou retirez-la en magasin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO SECTION -->
+  <section class="video-section">
+    <div class="container">
+      <div class="video-grid">
+        <div class="video-text">
+          <div class="section-label">Expérience</div>
+          <h2>Une application<br /><em>pensée pour vous</em></h2>
+          <p>Rogombe est conçu pour rendre votre vie plus facile. Interface intuitive, commandes rapides, notifications en temps réel et programme de fidélité qui vous récompense à chaque achat.</p>
+          <ul class="feature-list">
+            <li><span class="check">✓</span> Catalogue de 500+ produits</li>
+            <li><span class="check">✓</span> Géolocalisation des magasins proches</li>
+            <li><span class="check">✓</span> Notifications push instantanées</li>
+            <li><span class="check">✓</span> Programme de fidélité & récompenses</li>
+            <li><span class="check">✓</span> Avis & notations vérifiés</li>
+          </ul>
+          <a href="register.html" class="btn-primary">Créer mon compte gratuit</a>
+        </div>
+        <div class="video-player-wrap">
+          <div class="video-player">
+            <video autoplay muted loop playsinline>
+              <source src="https://cdn.pixabay.com/video/2023/04/12/158609-818195030_large.mp4" type="video/mp4" />
+            </video>
+            <div class="video-overlay-badge">
+              <span>🚀</span> Livraison en 30 min
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories" id="categories">
+    <div class="container">
+      <div class="section-label">Catalogue</div>
+      <h2 class="section-title">Explorez nos<br /><em>catégories</em></h2>
+      <div class="cat-grid">
+        <a href="categorie.html?cat=medicaments" class="cat-card" style="--cat-color:#16a34a">
+          <div class="cat-emoji">💊</div>
+          <h4>Médicaments</h4>
+          <span>180+ produits</span>
+        </a>
+        <a href="categorie.html?cat=cosmetiques" class="cat-card" style="--cat-color:#0ea5e9">
+          <div class="cat-emoji">🧴</div>
+          <h4>Cosmétiques</h4>
+          <span>95+ produits</span>
+        </a>
+        <a href="categorie.html?cat=boucherie" class="cat-card" style="--cat-color:#f59e0b">
+          <div class="cat-emoji">🥩</div>
+          <h4>Boucherie</h4>
+          <span>40+ produits</span>
+        </a>
+        <a href="categorie.html?cat=fruits-legumes" class="cat-card" style="--cat-color:#ef4444">
+          <div class="cat-emoji">🥦</div>
+          <h4>Fruits & Légumes</h4>
+          <span>60+ produits</span>
+        </a>
+        <a href="categorie.html?cat=produits-laitiers" class="cat-card" style="--cat-color:#8b5cf6">
+          <div class="cat-emoji">🥛</div>
+          <h4>Produits laitiers</h4>
+          <span>35+ produits</span>
+        </a>
+        <a href="categorie.html?cat=menager" class="cat-card" style="--cat-color:#ec4899">
+          <div class="cat-emoji">🧹</div>
+          <h4>Ménager</h4>
+          <span>50+ produits</span>
+        </a>
+        <a href="categorie.html?cat=boulangerie" class="cat-card" style="--cat-color:#14b8a6">
+          <div class="cat-emoji">🍞</div>
+          <h4>Boulangerie</h4>
+          <span>25+ produits</span>
+        </a>
+        <a href="categorie.html?cat=parapharmacie" class="cat-card" style="--cat-color:#f97316">
+          <div class="cat-emoji">🧪</div>
+          <h4>Parapharmacie</h4>
+          <span>70+ produits</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTENAIRES / ACTORS -->
+  <section class="actors" id="partenaires">
+    <div class="container">
+      <div class="section-label">Rejoignez-nous</div>
+      <h2 class="section-title">Une plateforme pour<br /><em>tous les acteurs</em></h2>
+      <div class="actors-tabs">
+        <button class="actor-tab active" data-tab="clients">👤 Clients</button>
+        <button class="actor-tab" data-tab="commercants">🏪 Commerçants</button>
+        <button class="actor-tab" data-tab="livreurs">🛵 Livreurs</button>
+      </div>
+      <div class="actor-panels">
+        <div class="actor-panel active" id="panel-clients">
+          <div class="panel-img">
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80" alt="Client app" />
+          </div>
+          <div class="panel-content">
+            <h3>Pour les clients</h3>
+            <p>Commandez médicaments et courses en quelques secondes depuis votre téléphone. Profitez d'une livraison rapide, d'un suivi GPS et d'un programme de fidélité exclusif.</p>
+            <ul>
+              <li>✓ Inscription gratuite</li>
+              <li>✓ Paiements Mobile Money & carte</li>
+              <li>✓ Historique & renouvellement facile</li>
+              <li>✓ Avis & notes communauté</li>
+            </ul>
+            <a href="register.html" class="btn-primary">Créer un compte client</a>
+          </div>
+        </div>
+        <div class="actor-panel" id="panel-commercants">
+          <div class="panel-img">
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="Commerçant dashboard" />
+          </div>
+          <div class="panel-content">
+            <h3>Pour les commerçants</h3>
+            <p>Pharmacies et supermarchés : développez votre activité en ligne. Gérez votre catalogue, traitez vos commandes et consultez vos statistiques depuis un tableau de bord intuitif.</p>
+            <ul>
+              <li>✓ Gestion catalogue simplifiée</li>
+              <li>✓ Tableau de bord des ventes</li>
+              <li>✓ Gestion des stocks en temps réel</li>
+              <li>✓ Support client dédié</li>
+            </ul>
+            <a href="register.html" class="btn-primary">Inscrire mon commerce</a>
+          </div>
+        </div>
+        <div class="actor-panel" id="panel-livreurs">
+          <div class="panel-img">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Livreur" />
+          </div>
+          <div class="panel-content">
+            <h3>Pour les livreurs</h3>
+            <p>Rejoignez notre réseau de livreurs partenaires et générez des revenus flexibles. Navigation intégrée, gestion des courses et paiements transparents.</p>
+            <ul>
+              <li>✓ Horaires flexibles</li>
+              <li>✓ Navigation GPS intégrée</li>
+              <li>✓ Paiements hebdomadaires</li>
+              <li>✓ Support en temps réel</li>
+            </ul>
+            <a href="register.html" class="btn-primary">Devenir livreur</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP DOWNLOAD -->
+  <section class="app-section" id="app">
+    <div class="app-bg"></div>
+    <div class="container">
+      <div class="app-grid">
+        <div class="app-phones">
+          <div class="phone phone-back">
+            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&q=80" alt="App screen" />
+          </div>
+          <div class="phone phone-front">
+            <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=400&q=80" alt="App screen 2" />
+          </div>
+        </div>
+        <div class="app-text">
+          <div class="section-label light">Application mobile</div>
+          <h2 class="light">Téléchargez<br /><em>l'application</em><br />Rogombe</h2>
+          <p>Disponible sur iOS et Android. Commandez en déplacement, recevez des notifications en temps réel et gérez vos favoris facilement.</p>
+          <div class="store-btns">
+            <a href="#" class="store-btn">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/200px-Google_Play_Store_badge_EN.svg.png" alt="Google Play" />
+            </a>
+            <a href="#" class="store-btn">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/200px-Download_on_the_App_Store_Badge.svg.png" alt="App Store" />
+            </a>
+          </div>
+          <div class="app-rating">
+            <div class="stars">★★★★★</div>
+            <span>4.8/5 — Plus de 1 200 avis</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-label">Témoignages</div>
+      <h2 class="section-title">Ce que disent<br /><em>nos utilisateurs</em></h2>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Rogombe m'a changé la vie ! Plus besoin de me déplacer en pharmacie sous la pluie. En 20 minutes mes médicaments sont là."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">MA</div>
+            <div>
+              <strong>Marie-Ange K.</strong>
+              <span>Libreville, Gabon</span>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card featured">
+          <div class="testi-stars">★★★★★</div>
+          <p>"En tant que pharmacien, Rogombe m'a permis de doubler mes ventes en ligne. L'interface est simple et le support est réactif."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">PO</div>
+            <div>
+              <strong>Pierre Obiang</strong>
+              <span>Pharmacien partenaire</span>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★☆</div>
+          <p>"Je fais mes courses toutes les semaines sur Rogombe. Les prix sont les mêmes qu'en magasin et la livraison est toujours ponctuelle."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">SF</div>
+            <div>
+              <strong>Sandra F.</strong>
+              <span>Port-Gentil, Gabon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Questions<br /><em>fréquentes</em></h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q">Comment passer ma première commande ? <span>+</span></button>
+          <div class="faq-a">Créez votre compte gratuitement, parcourez les pharmacies et supermarchés proches, ajoutez vos produits au panier et payez via Mobile Money, MasterCard ou à la livraison.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Quels sont les délais de livraison ? <span>+</span></button>
+          <div class="faq-a">En moyenne, la livraison est effectuée en 30 à 45 minutes selon votre localisation. Vous pouvez suivre votre livreur en temps réel sur la carte.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Les paiements sont-ils sécurisés ? <span>+</span></button>
+          <div class="faq-a">Oui, toutes les transactions sont chiffrées et sécurisées. Nous acceptons Airtel Money, Mobi Cash, MasterCard et le paiement en espèces à la livraison.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Comment inscrire ma pharmacie ou mon supermarché ? <span>+</span></button>
+          <div class="faq-a">Remplissez le formulaire d'inscription commerçant sur notre site. Notre équipe validera votre dossier sous 48h et vous fournira un accès à votre tableau de bord.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Y a-t-il un programme de fidélité ? <span>+</span></button>
+          <div class="faq-a">Oui ! Chaque commande vous rapporte des points Rogombe que vous pouvez échanger contre des réductions sur vos prochains achats.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <div class="cta-bg-video">
+      <video autoplay muted loop playsinline>
+        <source src="https://cdn.pixabay.com/video/2016/12/30/7171-197634410_large.mp4" type="video/mp4" />
+      </video>
+      <div class="cta-overlay"></div>
+    </div>
+    <div class="container">
+      <div class="cta-content">
+        <h2>Prêt à commander<br /><em>votre première livraison ?</em></h2>
+        <p>Rejoignez des milliers de Gabonais qui font confiance à Rogombe pour leurs achats quotidiens.</p>
+        <div class="cta-btns">
+          <a href="register.html" class="btn-hero-primary">Créer un compte gratuit</a>
+          <a href="login.html" class="btn-hero-ghost-white">Se connecter</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo footer-logo"><span class="logo-r">R</span>ogombe</div>
+          <p>La plateforme de commande en ligne des pharmacies & supermarchés du Gabon.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">in</a>
+            <a href="#" aria-label="WhatsApp">W</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Plateforme</h5>
+          <a href="#">Comment ça marche</a>
+          <a href="#">Catalogue</a>
+          <a href="#">Programme fidélité</a>
+          <a href="#">Application mobile</a>
+        </div>
+        <div class="footer-col">
+          <h5>Partenaires</h5>
+          <a href="register.html">Inscrire ma pharmacie</a>
+          <a href="register.html">Inscrire mon supermarché</a>
+          <a href="register.html">Devenir livreur</a>
+        </div>
+        <div class="footer-col">
+          <h5>Aide & Legal</h5>
+          <a href="#">Centre d'aide</a>
+          <a href="#">Conditions d'utilisation</a>
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">Nous contacter</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Rogombe. Tous droits réservés. Gabon 🇬🇦</span>
+        <span>Fait avec ❤️ pour le Gabon</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Devenir Livreur – Rogombe</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body { background:#f4f7f5; }
+
+    /* NAV */
+    .lnav { background:var(--dark); padding:0 24px; }
+    .lnav-inner { max-width:1100px; margin:0 auto; height:64px; display:flex; align-items:center; gap:20px; }
+    .lnav-logo { font-family:var(--font-display); font-size:1.6rem; font-weight:900; color:#fff; }
+    .lnav-logo .logo-r { color:var(--gold); }
+    .lnav-links { display:flex; gap:24px; margin-left:auto; }
+    .lnav-links a { color:rgba(255,255,255,.7); font-size:.9rem; font-weight:500; transition:color .2s; }
+    .lnav-links a:hover, .lnav-links a.active { color:#fff; }
+
+    /* HERO */
+    .l-hero {
+      background:linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 60%, #0d3320 100%);
+      padding:80px 24px;
+      position:relative; overflow:hidden;
+    }
+    .l-hero-deco {
+      position:absolute; top:-80px; right:-80px; width:500px; height:500px;
+      background:radial-gradient(circle, rgba(10,124,78,.25) 0%, transparent 70%);
+      border-radius:50%;
+    }
+    .l-hero-inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; position:relative; z-index:1; }
+    .l-hero-text h1 { font-family:var(--font-display); font-size:clamp(2rem,5vw,3.2rem); font-weight:900; color:#fff; line-height:1.08; margin-bottom:20px; }
+    .l-hero-text h1 em { color:var(--gold); font-style:italic; }
+    .l-hero-text p { color:rgba(255,255,255,.7); line-height:1.75; margin-bottom:32px; font-size:1rem; }
+    .l-hero-perks { display:flex; flex-direction:column; gap:14px; margin-bottom:36px; }
+    .l-perk { display:flex; align-items:center; gap:12px; color:#fff; font-size:.9rem; font-weight:500; }
+    .l-perk-icon { width:36px; height:36px; background:rgba(212,160,23,.2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+    .l-hero-stats { display:flex; gap:24px; flex-wrap:wrap; }
+    .l-stat { background:rgba(255,255,255,.08); border-radius:var(--radius); padding:16px 20px; text-align:center; backdrop-filter:blur(8px); }
+    .l-stat strong { display:block; font-size:1.8rem; font-weight:900; color:var(--gold); }
+    .l-stat span { font-size:.78rem; color:rgba(255,255,255,.6); }
+    .l-hero-img { position:relative; }
+    .l-hero-img img { width:100%; border-radius:var(--radius-lg); box-shadow:0 24px 64px rgba(0,0,0,.4); }
+    .l-hero-badge {
+      position:absolute; bottom:20px; left:20px;
+      background:#fff; border-radius:var(--radius); padding:14px 18px;
+      display:flex; align-items:center; gap:10px; box-shadow:var(--shadow-lg);
+    }
+    .l-hero-badge strong { display:block; font-size:.9rem; color:var(--dark); }
+    .l-hero-badge span { font-size:.78rem; color:var(--text-lt); }
+
+    /* TABS */
+    .l-tabs { background:#fff; border-bottom:1px solid var(--gray-2); }
+    .l-tabs-inner { max-width:1100px; margin:0 auto; display:flex; padding:0 24px; }
+    .l-tab { padding:18px 24px; font-family:var(--font-body); font-size:.9rem; font-weight:600; color:var(--text-lt); cursor:pointer; border-bottom:3px solid transparent; transition:all .25s; background:none; border-top:none; border-left:none; border-right:none; }
+    .l-tab:hover { color:var(--dark); }
+    .l-tab.active { color:var(--green); border-bottom-color:var(--green); }
+
+    /* PANELS */
+    .l-panel { display:none; max-width:1100px; margin:0 auto; padding:40px 24px 60px; }
+    .l-panel.active { display:block; }
+
+    /* INSCRIPTION PANEL */
+    .reg-grid { display:grid; grid-template-columns:1fr 420px; gap:40px; align-items:start; }
+    .reg-form-card { background:#fff; border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:36px; }
+    .reg-form-card h2 { font-family:var(--font-display); font-size:1.5rem; font-weight:900; color:var(--dark); margin-bottom:6px; }
+    .reg-form-card .sub { color:var(--text-lt); font-size:.9rem; margin-bottom:28px; }
+    .field-group { margin-bottom:18px; }
+    .field-group label { display:block; font-size:.85rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .field-group input, .field-group select, .field-group textarea {
+      width:100%; padding:13px 16px; border:1.5px solid var(--gray-2); border-radius:var(--radius);
+      font-family:var(--font-body); font-size:.9rem; color:var(--text);
+      background:var(--gray-1); outline:none; transition:border-color .2s, background .2s;
+    }
+    .field-group input:focus, .field-group select:focus { border-color:var(--green); background:#fff; }
+    .field-group input::placeholder { color:var(--gray-3); }
+    .f-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .loc-detect-btn {
+      display:flex; align-items:center; gap:8px; padding:12px 20px;
+      background:var(--green-lt); color:var(--green); border:1.5px solid var(--green);
+      border-radius:var(--radius); font-family:var(--font-body); font-size:.88rem;
+      font-weight:600; cursor:pointer; margin-top:8px; transition:all .2s; width:100%; justify-content:center;
+    }
+    .loc-detect-btn:hover { background:var(--green); color:#fff; }
+    .reg-submit {
+      width:100%; padding:16px; background:var(--green); color:#fff;
+      border:none; border-radius:50px; font-family:var(--font-body);
+      font-size:1rem; font-weight:700; cursor:pointer; margin-top:8px;
+      transition:background .25s, transform .2s;
+    }
+    .reg-submit:hover { background:var(--dark); transform:translateY(-2px); }
+    .terms-note { font-size:.78rem; color:var(--text-lt); text-align:center; margin-top:12px; line-height:1.6; }
+    .terms-note a { color:var(--green); }
+
+    .how-it-works { background:#fff; border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:32px; }
+    .how-it-works h3 { font-family:var(--font-display); font-size:1.2rem; font-weight:700; color:var(--dark); margin-bottom:24px; }
+    .hiw-step { display:flex; gap:16px; margin-bottom:20px; align-items:flex-start; }
+    .hiw-step:last-child { margin-bottom:0; }
+    .hiw-num { width:36px; height:36px; background:var(--green); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:.9rem; flex-shrink:0; }
+    .hiw-step h4 { font-size:.9rem; font-weight:700; color:var(--dark); margin-bottom:4px; }
+    .hiw-step p { font-size:.82rem; color:var(--text-lt); line-height:1.5; }
+
+    /* DASHBOARD LIVREUR PANEL */
+    .dash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:28px; }
+    .dash-kpi { background:#fff; border-radius:var(--radius); padding:20px 24px; box-shadow:var(--shadow); }
+    .dash-kpi strong { display:block; font-size:1.8rem; font-weight:900; color:var(--dark); }
+    .dash-kpi span { font-size:.82rem; color:var(--text-lt); }
+    .dash-kpi .kpi-icon { font-size:1.6rem; margin-bottom:8px; display:block; }
+
+    /* STATUS TOGGLE */
+    .status-toggle-wrap { background:#fff; border-radius:var(--radius-lg); padding:24px 28px; box-shadow:var(--shadow); margin-bottom:24px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+    .status-info h3 { font-family:var(--font-display); font-size:1.1rem; font-weight:700; color:var(--dark); margin-bottom:4px; }
+    .status-info p { font-size:.85rem; color:var(--text-lt); }
+    .toggle-wrap { display:flex; align-items:center; gap:12px; }
+    .toggle-label { font-size:.88rem; font-weight:600; color:var(--text-lt); }
+    .toggle-switch { position:relative; width:56px; height:28px; cursor:pointer; }
+    .toggle-switch input { display:none; }
+    .toggle-slider { position:absolute; inset:0; background:var(--gray-2); border-radius:50px; transition:background .3s; }
+    .toggle-slider::before { content:''; position:absolute; top:4px; left:4px; width:20px; height:20px; background:#fff; border-radius:50%; transition:transform .3s; box-shadow:0 2px 6px rgba(0,0,0,.2); }
+    .toggle-switch input:checked + .toggle-slider { background:var(--green); }
+    .toggle-switch input:checked + .toggle-slider::before { transform:translateX(28px); }
+    .online-dot { width:10px; height:10px; border-radius:50%; background:var(--gray-2); margin-right:4px; display:inline-block; transition:background .3s; }
+    .online-dot.on { background:#22c55e; animation:blinkDot 1.5s infinite; }
+    @keyframes blinkDot { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+    /* NOUVELLE COMMANDE NOTIFICATION */
+    .notif-card {
+      background:#fff; border-radius:var(--radius-lg); padding:24px; box-shadow:var(--shadow);
+      border-left:5px solid var(--gold); margin-bottom:20px;
+      animation:slideIn .4s ease both;
+    }
+    @keyframes slideIn { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:none} }
+    .notif-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; flex-wrap:wrap; gap:10px; }
+    .notif-header h3 { font-family:var(--font-display); font-size:1.05rem; font-weight:700; color:var(--dark); }
+    .notif-header .notif-badge { background:var(--gold-lt); color:#92400e; font-size:.75rem; font-weight:700; padding:4px 12px; border-radius:50px; border:1px solid #fcd34d; }
+    .notif-items { background:var(--gray-1); border-radius:var(--radius); padding:12px 16px; margin-bottom:16px; }
+    .notif-item { font-size:.88rem; color:var(--text); margin-bottom:4px; }
+    .notif-item:last-child { margin-bottom:0; }
+    .notif-meta { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px; }
+    .notif-meta-item { display:flex; align-items:center; gap:6px; font-size:.82rem; color:var(--text-lt); }
+    .notif-actions { display:flex; gap:10px; }
+    .notif-accept { flex:1; padding:12px; background:var(--green); color:#fff; border:none; border-radius:50px; font-family:var(--font-body); font-size:.9rem; font-weight:700; cursor:pointer; transition:background .2s; }
+    .notif-accept:hover { background:var(--dark); }
+    .notif-refuse { flex:1; padding:12px; background:var(--gray-1); color:var(--text-lt); border:1.5px solid var(--gray-2); border-radius:50px; font-family:var(--font-body); font-size:.9rem; font-weight:600; cursor:pointer; transition:all .2s; }
+    .notif-refuse:hover { border-color:#ef4444; color:#ef4444; }
+
+    /* LIVRAISON EN COURS */
+    .active-delivery-card { background:#fff; border-radius:var(--radius-lg); padding:24px; box-shadow:var(--shadow); border-left:5px solid var(--green); margin-bottom:20px; }
+    .ad-header { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+    .ad-live { background:#dcfce7; color:#16a34a; font-size:.78rem; font-weight:700; padding:4px 12px; border-radius:50px; animation:blinkDot 1.5s infinite; }
+    .ad-client { background:var(--gray-1); border-radius:var(--radius); padding:16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+    .ad-client h4 { font-size:.95rem; font-weight:700; color:var(--dark); margin-bottom:4px; }
+    .ad-client p { font-size:.82rem; color:var(--text-lt); }
+    .call-btn { display:flex; align-items:center; gap:8px; padding:10px 18px; background:var(--green); color:#fff; border:none; border-radius:50px; font-family:var(--font-body); font-size:.85rem; font-weight:700; cursor:pointer; }
+    .status-update-btns { display:flex; gap:10px; flex-wrap:wrap; }
+    .status-btn { flex:1; min-width:120px; padding:12px 16px; border-radius:50px; border:none; font-family:var(--font-body); font-size:.85rem; font-weight:700; cursor:pointer; transition:all .2s; }
+    .status-btn.enroute { background:var(--gold-lt); color:#92400e; border:1.5px solid #fcd34d; }
+    .status-btn.delivered { background:var(--green); color:#fff; }
+    .status-btn.problem { background:#fee2e2; color:#dc2626; border:1.5px solid #fca5a5; }
+    .status-btn:hover { transform:translateY(-2px); box-shadow:var(--shadow); }
+
+    /* HISTORIQUE */
+    .histo-table { width:100%; border-collapse:collapse; }
+    .histo-table th { text-align:left; font-size:.78rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--text-lt); padding:0 16px 12px 0; border-bottom:2px solid var(--gray-2); }
+    .histo-table td { padding:14px 16px 14px 0; border-bottom:1px solid var(--gray-2); font-size:.9rem; color:var(--text); }
+    .histo-table tr:last-child td { border-bottom:none; }
+    .status-pill { padding:5px 12px; border-radius:50px; font-size:.75rem; font-weight:700; }
+    .sp-done { background:var(--green-lt); color:var(--green); }
+    .sp-cancel { background:#fee2e2; color:#dc2626; }
+
+    @media(max-width:900px) {
+      .l-hero-inner { grid-template-columns:1fr; }
+      .l-hero-img { display:none; }
+      .reg-grid { grid-template-columns:1fr; }
+      .dash-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media(max-width:600px) {
+      .dash-grid { grid-template-columns:1fr; }
+      .l-hero-stats { gap:12px; }
+      .l-tab { padding:14px 14px; font-size:.82rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="lnav">
+  <div class="lnav-inner">
+    <a href="index.html" class="lnav-logo"><span class="logo-r">R</span>ogombe</a>
+    <div class="lnav-links">
+      <a href="index.html">Accueil</a>
+      <a href="espace-commercant.html">Commerçants</a>
+      <a href="livreur.html" class="active">Livreurs</a>
+      <a href="a-propos.html">À propos</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="l-hero">
+  <div class="l-hero-deco"></div>
+  <div class="l-hero-inner">
+    <div class="l-hero-text">
+      <div class="section-label light" style="margin-bottom:16px;">Programme Livreurs</div>
+      <h1>Devenez livreur<br /><em>Rogombe</em><br />et gagnez plus</h1>
+      <p>Travaillez à votre rythme, choisissez vos horaires et bénéficiez d'une rémunération transparente. Les clients proches de vous vous contactent directement.</p>
+      <div class="l-hero-perks">
+        <div class="l-perk"><div class="l-perk-icon">💰</div> Paiements hebdomadaires garantis</div>
+        <div class="l-perk"><div class="l-perk-icon">🕐</div> Horaires 100% flexibles</div>
+        <div class="l-perk"><div class="l-perk-icon">📍</div> Clients proches de votre zone</div>
+        <div class="l-perk"><div class="l-perk-icon">📱</div> Application simple et intuitive</div>
+      </div>
+      <div class="l-hero-stats">
+        <div class="l-stat"><strong>45+</strong><span>Livreurs actifs</span></div>
+        <div class="l-stat"><strong>30 min</strong><span>Temps moy.</span></div>
+        <div class="l-stat"><strong>98%</strong><span>Satisfaction</span></div>
+      </div>
+    </div>
+    <div class="l-hero-img">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Livreur Rogombe" />
+      <div class="l-hero-badge">
+        <span style="font-size:1.4rem;">🛵</span>
+        <div>
+          <strong>Wilson Ndong</strong>
+          <span>Livreur depuis 8 mois — 342 livraisons</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABS -->
+<div class="l-tabs">
+  <div class="l-tabs-inner">
+    <button class="l-tab active" onclick="switchTab('inscription', this)">📋 Inscription / Connexion</button>
+    <button class="l-tab" onclick="switchTab('dashboard', this)">📊 Mon Espace Livreur</button>
+    <button class="l-tab" onclick="switchTab('historique', this)">📦 Historique</button>
+  </div>
+</div>
+
+<!-- ======================== PANEL INSCRIPTION ======================== -->
+<div class="l-panel active" id="panel-inscription">
+  <div class="reg-grid">
+    <div>
+      <!-- CONNEXION / INSCRIPTION TABS -->
+      <div class="reg-form-card">
+        <div style="display:flex;gap:12px;margin-bottom:24px;">
+          <button class="l-tab active" style="flex:1;border-radius:50px;border:2px solid var(--green);padding:12px;" id="regTab" onclick="switchRegTab('register')">Nouveau livreur</button>
+          <button class="l-tab" style="flex:1;border-radius:50px;border:2px solid var(--gray-2);padding:12px;" id="loginTab" onclick="switchRegTab('login')">Déjà inscrit</button>
+        </div>
+
+        <!-- REGISTER FORM -->
+        <div id="regForm">
+          <h2>Rejoindre Rogombe</h2>
+          <p class="sub">Inscription gratuite — validation sous 24h</p>
+          <div class="f-row">
+            <div class="field-group"><label>Prénom *</label><input type="text" placeholder="Paul" /></div>
+            <div class="field-group"><label>Nom *</label><input type="text" placeholder="Mba" /></div>
+          </div>
+          <div class="field-group"><label>Téléphone * (visible par les clients)</label><input type="tel" id="livTel" placeholder="+241 07 12 34 56" /></div>
+          <div class="field-group"><label>Email</label><input type="email" placeholder="paul.mba@email.com" /></div>
+          <div class="field-group"><label>Type de véhicule *</label>
+            <select>
+              <option value="">Sélectionnez</option>
+              <option>🛵 Moto / Scooter</option>
+              <option>🚗 Voiture</option>
+              <option>🚲 Vélo</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Votre zone de livraison principale *</label>
+            <select id="livZone">
+              <option value="">Sélectionnez votre zone</option>
+              <option>Libreville Centre</option><option>Libreville Nord</option><option>Libreville Sud</option>
+              <option>Akanda</option><option>Owendo</option><option>PK5 – PK8</option>
+              <option>PK12 – Ntoum</option><option>Port-Gentil</option><option>Franceville</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Localisation actuelle</label>
+            <button class="loc-detect-btn" onclick="detectLivLocation()">📡 Détecter ma position automatiquement</button>
+            <p id="livLocResult" style="font-size:.82rem;color:var(--green);margin-top:8px;display:none;"></p>
+          </div>
+          <div class="field-group"><label>Numéro de permis *</label><input type="text" placeholder="GA-XXXXXXXX" /></div>
+          <div class="field-group"><label>Mot de passe *</label><input type="password" placeholder="Minimum 8 caractères" /></div>
+          <label style="display:flex;align-items:flex-start;gap:10px;font-size:.82rem;color:var(--text-lt);margin-bottom:20px;cursor:pointer;">
+            <input type="checkbox" style="margin-top:3px;accent-color:var(--green);" />
+            <span>J'accepte les <a href="conditions.html" style="color:var(--green);">Conditions livreurs</a> de Rogombe. Mon numéro sera visible pour les clients qui souhaitent une livraison.</span>
+          </label>
+          <button class="reg-submit" onclick="submitReg()">Rejoindre Rogombe →</button>
+          <p class="terms-note">Validation de votre dossier sous 24h par notre équipe.</p>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div id="loginForm" style="display:none;">
+          <h2>Se connecter</h2>
+          <p class="sub">Accédez à votre espace livreur</p>
+          <div class="field-group"><label>Téléphone ou Email</label><input type="text" placeholder="+241 07 12 34 56" /></div>
+          <div class="field-group"><label>Mot de passe</label><input type="password" placeholder="••••••••" /></div>
+          <button class="reg-submit" onclick="switchTab('dashboard', document.querySelectorAll('.l-tab')[1])">Se connecter →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="how-it-works">
+      <h3>Comment ça fonctionne ?</h3>
+      <div class="hiw-step">
+        <div class="hiw-num">1</div>
+        <div><h4>Vous vous inscrivez</h4><p>Renseignez vos informations et votre localisation. Votre numéro de téléphone sera visible par les clients proches.</p></div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">2</div>
+        <div><h4>Un client commande et choisit la livraison</h4><p>L'application détecte le livreur le plus proche du client selon la géolocalisation.</p></div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">3</div>
+        <div><h4>Vous recevez une notification</h4><p>Détails de la commande, adresse du magasin, adresse du client et montant apparaissent sur votre interface.</p></div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">4</div>
+        <div><h4>Vous récupérez et livrez</h4><p>Allez chercher les articles au magasin puis livrez au client. Mettez à jour le statut en temps réel.</p></div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">5</div>
+        <div><h4>Vous êtes payé</h4><p>Votre rémunération est créditée chaque semaine sur votre Mobile Money.</p></div>
+      </div>
+      <div style="background:var(--gold-lt);border-radius:var(--radius);padding:16px;margin-top:20px;border:1px solid #fcd34d;">
+        <strong style="font-size:.9rem;color:var(--dark);">💰 Tarifs de commission</strong>
+        <p style="font-size:.82rem;color:var(--text-lt);margin-top:6px;line-height:1.6;">Vous percevez <strong style="color:var(--dark);">70% des frais de livraison</strong> par course. Plus vous livrez, plus vous gagnez.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PANEL DASHBOARD ======================== -->
+<div class="l-panel" id="panel-dashboard">
+
+  <!-- KPIs -->
+  <div class="dash-grid">
+    <div class="dash-kpi"><span class="kpi-icon">📦</span><strong>24</strong><span>Livraisons ce mois</span></div>
+    <div class="dash-kpi"><span class="kpi-icon">💰</span><strong>38 400 F</strong><span>Revenus ce mois</span></div>
+    <div class="dash-kpi"><span class="kpi-icon">⭐</span><strong>4.9</strong><span>Note moyenne</span></div>
+  </div>
+
+  <!-- STATUS TOGGLE -->
+  <div class="status-toggle-wrap">
+    <div class="status-info">
+      <h3><span class="online-dot" id="onlineDot"></span> Statut de disponibilité</h3>
+      <p id="statusLabel">Vous êtes actuellement <strong>hors ligne</strong>. Activez pour recevoir des commandes.</p>
+    </div>
+    <div class="toggle-wrap">
+      <span class="toggle-label">Hors ligne</span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="availToggle" onchange="toggleAvail()" />
+        <div class="toggle-slider"></div>
+      </label>
+      <span class="toggle-label">En ligne</span>
+    </div>
+  </div>
+
+  <!-- NOUVELLE COMMANDE (notification simulée) -->
+  <div class="notif-card" id="newOrderCard" style="display:none;">
+    <div class="notif-header">
+      <div>
+        <h3>🔔 Nouvelle commande de livraison !</h3>
+        <p style="font-size:.82rem;color:var(--text-lt);margin-top:4px;">Reçue il y a 2 minutes — Zone : Akanda</p>
+      </div>
+      <span class="notif-badge">EN ATTENTE</span>
+    </div>
+    <div class="notif-items">
+      <div class="notif-item">💊 Paracétamol 500mg x2 — Pharmacie Centrale</div>
+      <div class="notif-item">🧴 Crème hydratante x1 — Beauty Shop LBV</div>
+    </div>
+    <div class="notif-meta">
+      <div class="notif-meta-item">📍 Magasin : <strong>Pharmacie Centrale, LBV Centre</strong></div>
+      <div class="notif-meta-item">🏠 Client : <strong>Akanda (3.2 km)</strong></div>
+      <div class="notif-meta-item">💰 Gain estimé : <strong style="color:var(--green);">1 750 FCFA</strong></div>
+    </div>
+    <div class="notif-actions">
+      <button class="notif-accept" onclick="acceptOrder()">✓ Accepter la livraison</button>
+      <button class="notif-refuse" onclick="refuseOrder()">✕ Refuser</button>
+    </div>
+  </div>
+
+  <!-- LIVRAISON EN COURS -->
+  <div class="active-delivery-card" id="activeDeliveryCard" style="display:none;">
+    <div class="ad-header">
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--dark);flex:1;">Livraison en cours</h3>
+      <span class="ad-live">● LIVE</span>
+    </div>
+    <div class="ad-client">
+      <div>
+        <h4>Marie-Ange Koumba</h4>
+        <p>📍 Akanda — +241 07 45 67 89</p>
+        <p style="font-size:.8rem;color:var(--text-lt);margin-top:4px;">Commande #RG-20241201 · 2 articles</p>
+      </div>
+      <button class="call-btn" onclick="window.location.href='tel:+24107456789'">📞 Appeler</button>
+    </div>
+    <p style="font-size:.85rem;font-weight:700;color:var(--dark);margin-bottom:12px;">Mettre à jour le statut :</p>
+    <div class="status-update-btns">
+      <button class="status-btn enroute" onclick="updateStatus('enroute')">🛵 En route vers magasin</button>
+      <button class="status-btn enroute" onclick="updateStatus('collected')">📦 Articles récupérés</button>
+      <button class="status-btn delivered" onclick="updateStatus('delivered')">✅ Livraison effectuée</button>
+      <button class="status-btn problem" onclick="updateStatus('problem')">⚠️ Problème</button>
+    </div>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div id="emptyDash" style="text-align:center;padding:60px 20px;background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow);">
+    <div style="font-size:3rem;margin-bottom:12px;">🛵</div>
+    <h3 style="font-family:var(--font-display);font-size:1.2rem;color:var(--dark);margin-bottom:8px;">Aucune commande en attente</h3>
+    <p style="color:var(--text-lt);font-size:.9rem;">Activez votre disponibilité pour recevoir des commandes dans votre zone.</p>
+  </div>
+</div>
+
+<!-- ======================== PANEL HISTORIQUE ======================== -->
+<div class="l-panel" id="panel-historique">
+  <div style="background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:28px;">
+    <h2 style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--dark);margin-bottom:24px;">Historique des livraisons</h2>
+    <table class="histo-table">
+      <thead>
+        <tr>
+          <th>Commande</th><th>Client</th><th>Zone</th><th>Date</th><th>Gain</th><th>Statut</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>#RG-20241201</strong></td><td>Marie-Ange K.</td><td>Akanda</td><td>01/12/2024</td><td style="color:var(--green);font-weight:700;">1 750 F</td><td><span class="status-pill sp-done">Livré</span></td></tr>
+        <tr><td><strong>#RG-20241128</strong></td><td>Pierre Obiang</td><td>Libreville Centre</td><td>28/11/2024</td><td style="color:var(--green);font-weight:700;">700 F</td><td><span class="status-pill sp-done">Livré</span></td></tr>
+        <tr><td><strong>#RG-20241127</strong></td><td>Sandra F.</td><td>Owendo</td><td>27/11/2024</td><td style="color:var(--green);font-weight:700;">1 400 F</td><td><span class="status-pill sp-done">Livré</span></td></tr>
+        <tr><td><strong>#RG-20241126</strong></td><td>Armand M.</td><td>PK8</td><td>26/11/2024</td><td style="color:#ef4444;font-weight:700;">—</td><td><span class="status-pill sp-cancel">Annulé</span></td></tr>
+        <tr><td><strong>#RG-20241124</strong></td><td>Cécile N.</td><td>Libreville Nord</td><td>24/11/2024</td><td style="color:var(--green);font-weight:700;">1 050 F</td><td><span class="status-pill sp-done">Livré</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  function switchTab(name, el) {
+    document.querySelectorAll('.l-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    document.querySelectorAll('.l-tabs .l-tab').forEach(t => t.classList.remove('active'));
+    if (el) el.classList.add('active');
+  }
+
+  function switchRegTab(mode) {
+    document.getElementById('regForm').style.display  = mode === 'register' ? 'block' : 'none';
+    document.getElementById('loginForm').style.display = mode === 'login'   ? 'block' : 'none';
+    document.getElementById('regTab').classList.toggle('active', mode === 'register');
+    document.getElementById('loginTab').classList.toggle('active', mode === 'login');
+  }
+
+  function detectLivLocation() {
+    const res = document.getElementById('livLocResult');
+    res.style.display = 'block';
+    res.textContent = '⏳ Détection en cours…';
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        res.textContent = `✅ Position détectée : Lat ${pos.coords.latitude.toFixed(4)}, Lng ${pos.coords.longitude.toFixed(4)}`;
+      }, () => {
+        res.textContent = '✅ Zone définie : Libreville Centre (par défaut)';
+      });
+    } else {
+      res.textContent = '✅ Zone définie : Libreville Centre (par défaut)';
+    }
+  }
+
+  function submitReg() {
+    const btn = document.querySelector('.reg-submit');
+    btn.textContent = '⏳ Envoi en cours…';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = '✅ Inscription envoyée ! Validation sous 24h.';
+      btn.style.background = '#16a34a';
+    }, 1800);
+  }
+
+  function toggleAvail() {
+    const on = document.getElementById('availToggle').checked;
+    const dot = document.getElementById('onlineDot');
+    const label = document.getElementById('statusLabel');
+    dot.classList.toggle('on', on);
+    if (on) {
+      label.innerHTML = 'Vous êtes <strong style="color:var(--green)">en ligne</strong>. Vous pouvez recevoir des commandes dans votre zone.';
+      // Simulate incoming order after 3s
+      setTimeout(() => {
+        document.getElementById('newOrderCard').style.display = 'block';
+        document.getElementById('emptyDash').style.display = 'none';
+      }, 3000);
+    } else {
+      label.innerHTML = 'Vous êtes <strong>hors ligne</strong>. Activez pour recevoir des commandes.';
+      document.getElementById('newOrderCard').style.display = 'none';
+      document.getElementById('activeDeliveryCard').style.display = 'none';
+      document.getElementById('emptyDash').style.display = 'block';
+    }
+  }
+
+  function acceptOrder() {
+    document.getElementById('newOrderCard').style.display = 'none';
+    document.getElementById('activeDeliveryCard').style.display = 'block';
+  }
+
+  function refuseOrder() {
+    document.getElementById('newOrderCard').style.display = 'none';
+    document.getElementById('emptyDash').style.display = 'block';
+  }
+
+  function updateStatus(status) {
+    const msgs = {
+      enroute:   '🛵 Statut mis à jour : En route vers le magasin',
+      collected: '📦 Statut mis à jour : Articles récupérés, en route vers le client',
+      delivered: '✅ Livraison confirmée ! Bien joué.',
+      problem:   '⚠️ Problème signalé. Le service client a été notifié.'
+    };
+    alert(msgs[status] || '');
+    if (status === 'delivered' || status === 'problem') {
+      document.getElementById('activeDeliveryCard').style.display = 'none';
+      document.getElementById('emptyDash').style.display = 'block';
+    }
+  }
+</script>
+</body>
+</html>
