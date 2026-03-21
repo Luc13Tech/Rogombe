@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription – Rogombe</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="auth-page">
+
+    <!-- VISUAL SIDE -->
+    <div class="auth-visual">
+      <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80" alt="Supermarché" />
+      <div class="auth-visual-overlay">
+        <a href="index.html" class="auth-visual-logo">
+          <span class="logo-r">R</span>ogombe
+        </a>
+        <h2>Rejoignez<br /><em>Rogombe</em></h2>
+        <p>Des milliers de Gabonais font déjà leurs courses et commandent leurs médicaments en ligne. À votre tour !</p>
+        <div class="perks">
+          <div class="perk">✓ Inscription 100% gratuite</div>
+          <div class="perk">✓ Livraison en 30 minutes</div>
+          <div class="perk">✓ Paiement Mobile Money</div>
+          <div class="perk">✓ Programme fidélité offert</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM SIDE -->
+    <div class="auth-form-side">
+      <div class="auth-form-wrap">
+        <h1>Créer un compte</h1>
+        <p class="auth-sub">Déjà inscrit ? <a href="login.html">Se connecter</a></p>
+
+        <div class="role-label">Je suis :</div>
+        <div class="role-select" id="regRoleSelect">
+          <label class="role-option selected" onclick="showFields('client')">
+            <input type="radio" name="role" value="client" checked />
+            <span class="role-icon">👤</span>
+            <span>Client</span>
+          </label>
+          <label class="role-option" onclick="showFields('commercant')">
+            <input type="radio" name="role" value="commercant" />
+            <span class="role-icon">🏪</span>
+            <span>Commerçant</span>
+          </label>
+          <label class="role-option" onclick="showFields('livreur')">
+            <input type="radio" name="role" value="livreur" />
+            <span class="role-icon">🛵</span>
+            <span>Livreur</span>
+          </label>
+        </div>
+
+        <!-- CLIENT FORM -->
+        <form class="auth-form" id="form-client" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom</label>
+              <input type="text" placeholder="Jean" required />
+            </div>
+            <div class="form-group">
+              <label>Nom</label>
+              <input type="text" placeholder="Obame" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Téléphone</label>
+            <input type="tel" placeholder="+241 07 12 34 56" required />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="votre@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>Ville</label>
+            <select>
+              <option value="">Sélectionnez votre ville</option>
+              <option>Libreville</option>
+              <option>Port-Gentil</option>
+              <option>Franceville</option>
+              <option>Oyem</option>
+              <option>Moanda</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Mot de passe</label>
+            <input type="password" placeholder="Minimum 8 caractères" required />
+          </div>
+          <div class="form-group">
+            <label>Confirmer le mot de passe</label>
+            <input type="password" placeholder="Répétez votre mot de passe" required />
+          </div>
+          <label class="terms-check">
+            <input type="checkbox" required />
+            <span>J'accepte les <a href="#">Conditions d'utilisation</a> et la <a href="#">Politique de confidentialité</a></span>
+          </label>
+          <button type="submit" class="auth-submit">Créer mon compte gratuit →</button>
+        </form>
+
+        <!-- COMMERCANT FORM -->
+        <form class="auth-form hidden-form" id="form-commercant" novalidate>
+          <div class="form-group">
+            <label>Nom du commerce</label>
+            <input type="text" placeholder="Pharmacie Centrale de Libreville" required />
+          </div>
+          <div class="form-group">
+            <label>Type de commerce</label>
+            <select required>
+              <option value="">Sélectionnez le type</option>
+              <option>Pharmacie</option>
+              <option>Supermarché</option>
+              <option>Épicerie</option>
+              <option>Parapharmacie</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom du gérant</label>
+              <input type="text" placeholder="Marie" required />
+            </div>
+            <div class="form-group">
+              <label>Nom du gérant</label>
+              <input type="text" placeholder="Nguema" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Téléphone professionnel</label>
+            <input type="tel" placeholder="+241 07 12 34 56" required />
+          </div>
+          <div class="form-group">
+            <label>Email professionnel</label>
+            <input type="email" placeholder="contact@votre-commerce.ga" required />
+          </div>
+          <div class="form-group">
+            <label>Adresse du commerce</label>
+            <input type="text" placeholder="Quartier Louis, Libreville" required />
+          </div>
+          <div class="form-group">
+            <label>Numéro de registre de commerce</label>
+            <input type="text" placeholder="RC/LBV/XXXX/B/XXXX" required />
+          </div>
+          <div class="form-group">
+            <label>Mot de passe</label>
+            <input type="password" placeholder="Minimum 8 caractères" required />
+          </div>
+          <label class="terms-check">
+            <input type="checkbox" required />
+            <span>J'accepte les <a href="#">Conditions partenaires</a> de Rogombe</span>
+          </label>
+          <button type="submit" class="auth-submit">Inscrire mon commerce →</button>
+          <p class="note-info">📋 Votre dossier sera examiné sous 48h par notre équipe.</p>
+        </form>
+
+        <!-- LIVREUR FORM -->
+        <form class="auth-form hidden-form" id="form-livreur" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom</label>
+              <input type="text" placeholder="Paul" required />
+            </div>
+            <div class="form-group">
+              <label>Nom</label>
+              <input type="text" placeholder="Mba" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Téléphone</label>
+            <input type="tel" placeholder="+241 07 12 34 56" required />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="votre@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>Type de véhicule</label>
+            <select required>
+              <option value="">Sélectionnez votre véhicule</option>
+              <option>Moto / Scooter</option>
+              <option>Vélo</option>
+              <option>Voiture</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Zone de livraison</label>
+            <select required>
+              <option value="">Sélectionnez votre zone</option>
+              <option>Libreville Centre</option>
+              <option>Libreville Nord</option>
+              <option>Libreville Sud</option>
+              <option>Owendo</option>
+              <option>Port-Gentil</option>
+              <option>Franceville</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Numéro de permis de conduire</label>
+            <input type="text" placeholder="XX-XXXXXXXX" required />
+          </div>
+          <div class="form-group">
+            <label>Mot de passe</label>
+            <input type="password" placeholder="Minimum 8 caractères" required />
+          </div>
+          <label class="terms-check">
+            <input type="checkbox" required />
+            <span>J'accepte les <a href="#">Conditions livreurs</a> de Rogombe</span>
+          </label>
+          <button type="submit" class="auth-submit">Devenir livreur Rogombe →</button>
+          <p class="note-info">🛵 Validation sous 24h. Gagnez en toute flexibilité !</p>
+        </form>
+
+        <div class="back-home">
+          <a href="index.html">← Retour à l'accueil</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .role-label {
+      font-size: .87rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .perks {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .perk {
+      color: rgba(255,255,255,.85);
+      font-size: .92rem;
+      font-weight: 500;
+    }
+    .hidden-form { display: none; }
+    .terms-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .85rem;
+      color: var(--text-lt);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .terms-check input { margin-top: 2px; flex-shrink: 0; }
+    .terms-check a { color: var(--green); }
+    .note-info {
+      text-align: center;
+      font-size: .82rem;
+      color: var(--text-lt);
+      margin-top: 12px;
+    }
+    .back-home { text-align: center; margin-top: 20px; }
+    .back-home a { font-size: .88rem; color: var(--text-lt); font-weight: 500; }
+    .back-home a:hover { color: var(--green); }
+    @media (max-width: 900px) {
+      .auth-visual { display: none; }
+      .auth-page { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <script>
+    function showFields(role) {
+      document.querySelectorAll('.auth-form').forEach(f => f.classList.add('hidden-form'));
+      document.getElementById('form-' + role).classList.remove('hidden-form');
+      document.querySelectorAll('.role-option').forEach(o => o.classList.remove('selected'));
+    }
+    document.querySelectorAll('.role-option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        document.querySelectorAll('.role-option').forEach(o => o.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
+    // Submit handler
+    document.querySelectorAll('.auth-form').forEach(form => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const btn = form.querySelector('.auth-submit');
+        btn.textContent = 'Création en cours…';
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.textContent = '✓ Compte créé avec succès !';
+          btn.style.background = '#16a34a';
+          setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+        }, 1800);
+      });
+    });
+  </script>
+
+  <script src="main.js"></script>
+</body>
+</html>
